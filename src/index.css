@@ -5,8 +5,12 @@ body {
   color: #fff;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+main {
+  flex: 1;
+}
+
+.site-container {
+  min-height: 100vh;
 }
 
 nav {

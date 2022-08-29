@@ -1,13 +1,15 @@
 body {
   background-color: #000;
-  font-family: 'Noto Sans TC', sans-serif;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Noto Sans TC", sans-serif;
+  font-family: "Roboto", sans-serif;
   color: #fff;
 }
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+main {
+  flex: 1;
 }
 
-@import './components/Navbar'
+.site-container {
+  min-height: 100vh;
+}
+
+@import "./components/Navbar";
