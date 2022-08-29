@@ -14,7 +14,7 @@ function Navbar() {
             </Link>
           </li>
           <li>
-            <Link className="text-decoration-none" to={"/product"}>
+            <Link className="text-decoration-none" to={"/ProductList"}>
               產品列表
             </Link>
           </li>
