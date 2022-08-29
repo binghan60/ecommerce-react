@@ -1,27 +1,38 @@
 import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home/Home";
-import Product from "./pages/Products/Product";
+import ProductList from "./pages/Products/ProductList";
+import ProductPage from "./pages/Products/ProductPage";
 import Reserve from "./pages/Reserve/Reserve";
 import Member from "./pages/Member/Member";
 import Cart from "./pages/Cart/Cart";
 import Dashboard from "./pages/Dashboard/Dashboard";
+import { Container } from "react-bootstrap";
 
 function App() {
   return (
     <>
       <BrowserRouter>
-        <Navbar></Navbar>
-        <Routes>
-          <Route>
-            <Route path="/" element={<Home />} />
-            <Route path="/member" element={<Member />} />
-            <Route path="/product" element={<Product />} />
-            <Route path="/reserve" element={<Reserve />} />
-            <Route path="/cart" element={<Cart />} />
-            <Route path="/dashboard" element={<Dashboard />} />
-          </Route>
-        </Routes>
+        <div className="d-flex flex-column site-container">
+          <header>
+            <Navbar />
+          </header>
+          <main>
+            <Container>
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/member" element={<Member />} />
+                <Route path="/ProductList/:slug" element={<ProductPage />} />
+                <Route path="/ProductList" element={<ProductList />} />
+                <Route path="/reserve" element={<Reserve />} />
+                <Route path="/cart" element={<Cart />} />
+                <Route path="/dashboard" element={<Dashboard />} />
+              </Routes>
+            </Container>
+          </main>
+          <Footer /> 
+        </div>
       </BrowserRouter>
     </>
   );
