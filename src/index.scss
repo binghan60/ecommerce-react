@@ -1,4 +1,8 @@
+
+
 body {
+  //避免scroll bar擠壓爆版
+  overflow-y: overlay;
   background-color: #000;
   font-family: "Noto Sans TC", sans-serif;
   font-family: "Roboto", sans-serif;
@@ -13,3 +17,4 @@ main {
 }
 
 @import "./components/Navbar";
+@import "./pages/ProductList/components/Rating";

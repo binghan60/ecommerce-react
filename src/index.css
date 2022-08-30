@@ -1,4 +1,5 @@
 body {
+  overflow-y: overlay;
   background-color: #000;
   font-family: "Noto Sans TC", sans-serif;
   font-family: "Roboto", sans-serif;
@@ -22,4 +23,8 @@ nav {
 }
 nav a {
   color: #fff;
+}
+
+.rating span {
+  color: gold;
 }/*# sourceMappingURL=index.css.map */
