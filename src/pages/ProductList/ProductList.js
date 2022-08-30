@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import Product from "./components/Product";
+import ProductCard from "./components/ProductCard";
 
 function ProductList() {
   const [ProductData, setProductData] = useState([]);
@@ -23,7 +23,7 @@ function ProductList() {
           {ProductData.map((ProductData) => {
             return (
               <Col sm={6} md={4} lg={3} className="mb-4" key={ProductData.id}>
-                <Product ProductData={ProductData}></Product>
+                <ProductCard ProductData={ProductData}></ProductCard>
               </Col>
             );
           })}
