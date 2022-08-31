@@ -1,15 +1,19 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import CartPage from "../pages/CartPage/CartPage";
+import Badge from "react-bootstrap/Badge";
+import { Store } from "../Store";
 
 function Navbar() {
+  const { state } = useContext(Store);
+  const { cart } = state;
+
   return (
     <>
-      <nav>
+      <nav className="mb-5">
         <ul className="d-flex justify-content-between container">
           <li>
-            <Link
-              className="text-decoration-none"
-              to={"/"}
-            >
+            <Link className="text-decoration-none" to={"/"}>
               首頁
             </Link>
           </li>
@@ -29,8 +33,13 @@ function Navbar() {
             </Link>
           </li>
           <li>
-            <Link className="text-decoration-none" to={"/cart"}>
+            <Link className="text-decoration-none" to={"/cartpage"}>
               購物車
+              {cart.cartItems.length > 0 && (
+                <Badge pill bg="danger">
+                  {cart.cartItems.reduce((a, c) => a + c.quantity, 0)}
+                </Badge>
+              )}
             </Link>
           </li>
           <li>
