@@ -30,18 +30,27 @@ function ProductPage() {
   }
   //state購物車狀態
   const { state, dispatch: ctxDispatch } = useContext(Store);
-  const addToCartHandler = () => {
+  const { cart } = state;
+  const addToCartHandler = async () => {
+    const existItem = cart.cartItems.find((x) => x._id === ProductPageData._id);
+    //假如在車內 商品+1
+    const quantity = existItem ? existItem.quantity + 1 : 1;
+    const { data } = await axios.get(
+      `http://localhost:5000/api/products/${ProductPageData._id}`
+    );
+    if (data.countInStock < quantity) {
+      window.alert("商品無庫存");
+      return;
+    }
     ctxDispatch({
       type: "CART_ADD_ITEM",
-      payload: { ...ProductPageData, quantity: 1 },
+      payload: { ...ProductPageData, quantity },
     });
   };
 
   return (
     <>
-      {console.log("state", state)}
       <Row>
-        {console.log(ProductPageData)}
         <Col sm={12} md={6} lg={6}>
           <img
             className="w-100"

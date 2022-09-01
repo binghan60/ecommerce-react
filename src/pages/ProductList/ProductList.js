@@ -22,7 +22,7 @@ function ProductList() {
         <Row>
           {ProductData.map((ProductData) => {
             return (
-              <Col sm={6} md={4} lg={3} className="mb-4" key={ProductData.id}>
+              <Col sm={6} md={4} lg={3} className="mb-4" key={ProductData._id}>
                 <ProductCard ProductData={ProductData}></ProductCard>
               </Col>
             );
