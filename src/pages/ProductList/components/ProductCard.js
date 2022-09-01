@@ -17,9 +17,6 @@ function ProductCard(props) {
         <strong>{ProductData.price}元</strong>
         <span className="float-end">庫存尚有{ProductData.countInStock}份</span>
       </p>
-      <div className="text-center">
-        <button className="btn btn-success">加入購物車</button>
-      </div>
     </div>
   );
 }

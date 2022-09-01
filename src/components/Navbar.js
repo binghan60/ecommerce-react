@@ -1,6 +1,5 @@
 import { useContext } from "react";
 import { Link } from "react-router-dom";
-import CartPage from "../pages/CartPage/CartPage";
 import Badge from "react-bootstrap/Badge";
 import { Store } from "../Store";
 
