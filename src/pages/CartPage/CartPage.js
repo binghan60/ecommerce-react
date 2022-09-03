@@ -27,6 +27,12 @@ function CartPage() {
       payload: { ...item, quantity },
     });
   };
+  const removeItemHandler = (item) => {
+    ctxDispatch({
+      type: "CART_REMOVE_ITEM",
+      payload: item,
+    });
+  };
   return (
     <>
       <Helmet>
@@ -78,7 +84,10 @@ function CartPage() {
                         </Col>
                         <Col md={2}>${item.price}</Col>
                         <Col md={3}>
-                          <Button variant="light">
+                          <Button
+                            onClick={() => removeItemHandler(item)}
+                            variant="light"
+                          >
                             <i class="fa-solid fa-trash"></i>
                           </Button>
                         </Col>
