@@ -1,7 +1,7 @@
 function Reserve() {
   return (
     <>
-      <h1>Reserve</h1>
+      <h3>Reserve</h3>
     </>
   );
 }
