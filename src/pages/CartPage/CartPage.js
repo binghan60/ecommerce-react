@@ -7,13 +7,26 @@ import Col from "react-bootstrap/Col";
 import ListGroup from "react-bootstrap/ListGroup";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
+import axios from "axios";
 
 function CartPage() {
   const { state, dispatch: ctxDispatch } = useContext(Store);
   const {
     cart: { cartItems },
   } = state;
-
+  const updateCartHandler = async (item, quantity) => {
+    const { data } = await axios.get(
+      `http://localhost:5000/api/products/${item._id}`
+    );
+    // if (data.countInStock < quantity) {
+    //   window.alert("商品無庫存");
+    //   return;
+    // }
+    ctxDispatch({
+      type: "CART_ADD_ITEM",
+      payload: { ...item, quantity },
+    });
+  };
   return (
     <>
       <Helmet>
@@ -44,6 +57,9 @@ function CartPage() {
                         </Col>
                         <Col md={3}>
                           <Button
+                            onClick={() =>
+                              updateCartHandler(item, item.quantity - 1)
+                            }
                             variant="light"
                             disabled={item.quantity === 1}
                           >
@@ -51,6 +67,9 @@ function CartPage() {
                           </Button>
                           <span> {item.quantity} </span>
                           <Button
+                            onClick={() =>
+                              updateCartHandler(item, item.quantity + 1)
+                            }
                             variant="light"
                             disabled={item.quantity === item.countInStock}
                           >
