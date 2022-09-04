@@ -39,7 +39,7 @@ function ProductPage() {
       `http://localhost:5000/api/products/${ProductPageData._id}`
     );
     if (data.countInStock < quantity) {
-      window.alert("商品無庫存");
+      window.alert("商品庫存不足");
       return;
     }
     ctxDispatch({
@@ -78,7 +78,7 @@ function ProductPage() {
               <p className="text-center">{ProductPageData.description}</p>
             </ListGroup.Item>
             <ListGroup.Item>
-              產品狀態：
+              商品狀態：
               {ProductPageData.countInStock > 0 ? (
                 <Badge bg="success">庫存充足</Badge>
               ) : (

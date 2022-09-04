@@ -17,7 +17,7 @@ function ProductList() {
 
   return (
     <>
-      <h3>產品列表</h3>
+      <h3>商品列表</h3>
       <main className="d-flex">
         <Row>
           {ProductData.map((ProductData) => {

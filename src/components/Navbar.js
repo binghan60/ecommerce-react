@@ -18,7 +18,7 @@ function Navbar() {
           </li>
           <li>
             <Link className="text-decoration-none" to={"/ProductList"}>
-              產品列表
+              購物商城
             </Link>
           </li>
           <li>
