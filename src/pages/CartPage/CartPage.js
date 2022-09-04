@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Store } from "../../Store";
 import { Helmet } from "react-helmet-async";
 import Row from "react-bootstrap/Row";
@@ -10,6 +10,7 @@ import Card from "react-bootstrap/Card";
 import axios from "axios";
 
 function CartPage() {
+  const navigate = useNavigate();
   const { state, dispatch: ctxDispatch } = useContext(Store);
   const {
     cart: { cartItems },
@@ -33,6 +34,9 @@ function CartPage() {
       payload: item,
     });
   };
+  const checkoutHandler = () => {
+    navigate("/singin?redirect=/shipping");
+  };
   return (
     <>
       <Helmet>
@@ -52,9 +56,9 @@ function CartPage() {
               <ListGroup>
                 {cartItems.map((item) => {
                   return (
-                    <ListGroup.Item>
+                    <ListGroup.Item key={item._id}>
                       <Row className="align-items-center">
-                        <Col md={4}>
+                        <Col md={3}>
                           <img
                             className="w-100"
                             src={`/imgs/${item.img}`}
@@ -62,6 +66,11 @@ function CartPage() {
                           ></img>
                         </Col>
                         <Col md={3}>
+                          <Link className="text-decoration-none" to={`/ProductList/${item.slug}`}>
+                            {item.name}
+                          </Link>
+                        </Col>
+                        <Col className="text-center" md={2}>
                           <Button
                             onClick={() =>
                               updateCartHandler(item, item.quantity - 1)
@@ -69,7 +78,7 @@ function CartPage() {
                             variant="light"
                             disabled={item.quantity === 1}
                           >
-                            <i class="fa-sharp fa-solid fa-minus"></i>
+                            <i className="fa-sharp fa-solid fa-minus"></i>
                           </Button>
                           <span> {item.quantity} </span>
                           <Button
@@ -79,16 +88,18 @@ function CartPage() {
                             variant="light"
                             disabled={item.quantity === item.countInStock}
                           >
-                            <i class="fa-sharp fa-solid fa-plus"></i>
+                            <i className="fa-sharp fa-solid fa-plus"></i>
                           </Button>
                         </Col>
-                        <Col md={2}>${item.price}</Col>
-                        <Col md={3}>
+                        <Col className="text-center" md={2}>
+                          ${item.price}
+                        </Col>
+                        <Col className="text-center" md={2}>
                           <Button
                             onClick={() => removeItemHandler(item)}
                             variant="light"
                           >
-                            <i class="fa-solid fa-trash"></i>
+                            <i className="fa-solid fa-trash"></i>
                           </Button>
                         </Col>
                       </Row>
@@ -118,7 +129,11 @@ function CartPage() {
                     </ListGroup.Item>
                     <ListGroup.Item>
                       <div className="d-grid">
-                        <Button type="button" variant="secondary">
+                        <Button
+                          onClick={checkoutHandler}
+                          type="button"
+                          variant="secondary"
+                        >
                           立即結帳
                         </Button>
                       </div>
