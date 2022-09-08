@@ -8,12 +8,11 @@ function NavbarComponent() {
   const { cart, userInfo } = state;
   const logoutHandler = () => {
     ctxDispatch({ type: "USER_LOGOUT" });
-    localStorage.removeItem("userInfo");
   };
 
   return (
     <>
-      <Navbar>
+      <Navbar className="mb-5">
         <Container>
           <Link to={"/"}>首頁</Link>
           <Link to={"/productList"}>購物商城</Link>
@@ -38,14 +37,12 @@ function NavbarComponent() {
                 <Link to={"/orderhistory"}>歷史訂單</Link>
               </NavDropdown.Item>
               <NavDropdown.Divider />
-              <NavDropdown.Item>
-                <Link to={"#logout"} onClick={logoutHandler}>
-                  登出
-                </Link>
+              <NavDropdown.Item onClick={logoutHandler}>
+                <Link to={"#logout"}>登出</Link>
               </NavDropdown.Item>
             </NavDropdown>
           ) : (
-            <Link to={"/singIn"}>會員登入</Link>
+            <Link to={"/signin"}>會員登入</Link>
           )}
         </Container>
       </Navbar>
