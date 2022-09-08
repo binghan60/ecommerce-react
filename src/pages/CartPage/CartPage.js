@@ -2,11 +2,7 @@ import { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Store } from "../../Store";
 import { Helmet } from "react-helmet-async";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import ListGroup from "react-bootstrap/ListGroup";
-import Button from "react-bootstrap/Button";
-import Card from "react-bootstrap/Card";
+import { Button, Card, ListGroup, Row, Col } from "react-bootstrap";
 import axios from "axios";
 
 function CartPage() {
@@ -46,7 +42,7 @@ function CartPage() {
       <Row>
         {cartItems.length === 0 ? (
           <Col md={12}>
-            <Link className="text-decoration-none" to={"/productList"}>
+            <Link to={"/productList"}>
               <h5 className="text-center">尚未選購商品，點擊前往購物</h5>
             </Link>
           </Col>
@@ -56,17 +52,19 @@ function CartPage() {
               <ListGroup>
                 {cartItems.map((item) => {
                   return (
-                    <ListGroup.Item key={item._id}>
+                    <ListGroup.Item key={item.slug}>
                       <Row className="align-items-center">
                         <Col md={3}>
                           <img
                             className="w-100"
-                            src={`/imgs/${item.img}`}
+                            src={`/imgs/${item.image}`}
                             alt={item.name}
                           ></img>
                         </Col>
                         <Col md={3}>
-                          <Link className="text-decoration-none" to={`/ProductList/${item.slug}`}>
+                          <Link
+                            to={`/ProductList/${item.slug}`}
+                          >
                             {item.name}
                           </Link>
                         </Col>

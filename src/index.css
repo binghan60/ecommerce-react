@@ -10,6 +10,10 @@ main {
   flex: 1;
 }
 
+a {
+  text-decoration: none;
+}
+
 .site-container {
   min-height: 100vh;
 }
@@ -22,6 +26,11 @@ nav {
   font-weight: bold;
 }
 nav a {
+  color: #fff;
+  text-decoration: none;
+}
+
+nav-link {
   color: #fff;
 }
 

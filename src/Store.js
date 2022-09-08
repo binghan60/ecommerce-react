@@ -4,11 +4,15 @@ export const Store = createContext();
 
 const initialState = {
   cart: {
-    // localStorage沒東西就是空陣列
+    //初始狀態是localStorage沒東西就是空陣列
+    //localStorage必須是字串 否則會變[object Object]
     cartItems: localStorage.getItem("cartItems")
       ? JSON.parse(localStorage.getItem("cartItems"))
       : [],
   },
+  userInfo: localStorage.getItem("userInfo")
+    ? JSON.parse(localStorage.getItem("userInfo"))
+    : null,
 };
 
 function reducer(state, action) {
@@ -34,7 +38,12 @@ function reducer(state, action) {
       localStorage.setItem("cartItems", JSON.stringify(cartItems));
       return { ...state, cart: { ...state.cart, cartItems } };
     }
-
+    case "USER_SINGIN": {
+      return { ...state, userInfo: action.payload };
+    }
+    case "USER_LOGOUT": {
+      return { ...state, userInfo: null };
+    }
     default:
       return state;
   }

@@ -1,9 +1,8 @@
-import axios from "axios";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
+import { Row, Col } from "react-bootstrap";
 import ProductCard from "./components/ProductCard";
+import axios from "axios";
 
 function ProductList() {
   const [ProductData, setProductData] = useState([]);
@@ -22,7 +21,7 @@ function ProductList() {
         <Row>
           {ProductData.map((ProductData) => {
             return (
-              <Col sm={6} md={4} lg={3} className="mb-4" key={ProductData._id}>
+              <Col sm={6} md={4} lg={3} className="mb-4" key={ProductData.slug}>
                 <ProductCard ProductData={ProductData}></ProductCard>
               </Col>
             );

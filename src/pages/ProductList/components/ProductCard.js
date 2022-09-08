@@ -29,7 +29,7 @@ function ProductCard(props) {
   return (
     <div>
       <Link to={`/ProductList/${ProductData.slug}`}>
-        <img className="w-100 pb-3" src={`/imgs/${ProductData.img}`} alt="" />
+        <img className="w-100 pb-3" src={`/imgs/${ProductData.image}`} alt="" />
       </Link>
       <h6>{ProductData.name}</h6>
       <Rating
@@ -42,7 +42,9 @@ function ProductCard(props) {
       </p>
       <div className="text-center">
         {ProductData.countInStock === 0 ? (
-          <Button variant="danger" disabled>商品補貨中</Button>
+          <Button variant="danger" disabled>
+            商品補貨中
+          </Button>
         ) : (
           <Button
             onClick={() => addToCartHandler(ProductData)}

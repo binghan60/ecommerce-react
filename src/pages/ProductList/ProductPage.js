@@ -1,14 +1,10 @@
-import { useParams, Link, useNavigate } from "react-router-dom";
 import { useState, useEffect, useContext } from "react";
-import Rating from "./components/Rating";
-import Col from "react-bootstrap/Col";
-import Row from "react-bootstrap/Row";
-import ListGroup from "react-bootstrap/ListGroup";
-import Button from "react-bootstrap/Button";
-import Badge from "react-bootstrap/Badge";
-import axios from "axios";
+import { useParams, Link, useNavigate } from "react-router-dom";
+import { Row, Col, Button, ListGroup, Badge } from "react-bootstrap";
 import { Helmet } from "react-helmet-async";
+import Rating from "./components/Rating";
 import { Store } from "../../Store";
+import axios from "axios";
 
 function ProductPage() {
   const params = useParams();
@@ -54,7 +50,7 @@ function ProductPage() {
         <Col sm={12} md={6} lg={6}>
           <img
             className="w-100"
-            src={`/imgs/${ProductPageData.img}`}
+            src={`/imgs/${ProductPageData.image}`}
             alt={ProductPageData.name}
           />
         </Col>

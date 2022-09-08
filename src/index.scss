@@ -1,5 +1,3 @@
-
-
 body {
   //避免scroll bar擠壓爆版
   overflow-y: overlay;
@@ -10,6 +8,9 @@ body {
 }
 main {
   flex: 1;
+}
+a {
+  text-decoration: none;
 }
 
 .site-container {
