@@ -2,14 +2,17 @@ import { useState, useContext, useEffect } from "react";
 import { Container, Form, Button } from "react-bootstrap";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
-import axios from "axios";
 import { Store } from "../../Store";
-import { toast, Toast } from "react-toastify";
-
-function SignIn() {
+import { toast } from "react-toastify";
+import axios from "axios";
+//購物車結帳跳轉本頁附帶queryString  用redirectInUrl抓取暫時存放在queryString redirect的/shipping
+//從購物車進redirectInUrl就是shipping  直接去登入頁,redirectInUrl沒抓到東西,變數redirect就是"/"
+//一般登入沒有redirect 跳轉首頁
+//購物車結帳(有redirect=/shipping) 成功就跳轉redirect(/shipping)
+function Signin() {
   const navigate = useNavigate();
   const { search } = useLocation();
-  //search是整串query string
+  //search是整串query string ?redirect=值
   const redirectInUrl = new URLSearchParams(search).get("redirect");
   //redirectInUrl是query string裡的redirect=值
   const redirect = redirectInUrl ? redirectInUrl : "/";
@@ -24,10 +27,10 @@ function SignIn() {
     e.preventDefault();
     try {
       const { data } = await axios.post(
-        `http://localhost:5000/api/users/singin`,
+        `http://localhost:5000/api/users/signin`,
         { email, password }
       );
-      ctxDispatch({ type: "USER_SINGIN", payload: data });
+      ctxDispatch({ type: "USER_SIGNIN", payload: data });
       localStorage.setItem("userInfo", JSON.stringify(data));
       //如果redirect不存在 回首頁
       navigate(redirect || "/");
@@ -35,7 +38,7 @@ function SignIn() {
       toast.error("帳號密碼錯誤");
     }
   };
-  //登入狀態直接打/singin跳轉首頁
+  //登入狀態直接打/signin跳轉首頁
   useEffect(() => {
     if (userInfo) {
       navigate(redirect);
@@ -50,7 +53,7 @@ function SignIn() {
       <Form className="mt-5" onSubmit={submitHandler}>
         <Form.Group>
           <Form.Label>
-            <h3>Email</h3>
+            <h4>Email</h4>
           </Form.Label>
           <Form.Control
             type="email"
@@ -60,7 +63,7 @@ function SignIn() {
         </Form.Group>
         <Form.Group>
           <Form.Label>
-            <h3>Password</h3>
+            <h4>Password</h4>
           </Form.Label>
           <Form.Control
             type="Password"
@@ -68,7 +71,7 @@ function SignIn() {
             onChange={(e) => setPassword(e.target.value)}
           ></Form.Control>
         </Form.Group>
-        <div className="text-center my-3">
+        <div className="text-center my-4">
           <Button type="submit">Sing In</Button>
         </div>
         <div className="text-center">
@@ -83,4 +86,4 @@ function SignIn() {
   );
 }
 
-export default SignIn;
+export default Signin;
