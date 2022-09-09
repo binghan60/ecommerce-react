@@ -62,9 +62,7 @@ function CartPage() {
                           ></img>
                         </Col>
                         <Col md={3}>
-                          <Link
-                            to={`/ProductList/${item.slug}`}
-                          >
+                          <Link to={`/ProductList/${item.slug}`}>
                             {item.name}
                           </Link>
                         </Col>
@@ -111,19 +109,17 @@ function CartPage() {
                 <Card.Body>
                   <ListGroup variant="black">
                     <ListGroup.Item>
-                      <h4>
-                        總計
-                        {cartItems.reduce((a, c) => a + c.quantity, 0)}
-                        件商品：
-                        <p>
-                          總計$
-                          {cartItems.reduce(
-                            (a, c) => a + c.price * c.quantity,
-                            0
-                          )}
-                          元
-                        </p>
-                      </h4>
+                      <h4>總計</h4>
+                      {cartItems.reduce((a, c) => a + c.quantity, 0)}
+                      件商品：
+                      <p>
+                        總計$
+                        {cartItems.reduce(
+                          (a, c) => a + c.price * c.quantity,
+                          0
+                        )}
+                        元
+                      </p>
                     </ListGroup.Item>
                     <ListGroup.Item>
                       <div className="d-grid">

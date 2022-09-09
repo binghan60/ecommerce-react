@@ -1,5 +1,5 @@
 import { useState, useContext, useEffect } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Container, Form, Button } from "react-bootstrap";
 import { Helmet } from "react-helmet-async";
 import CheckoutSteps from "./components/CheckoutSteps";
@@ -52,7 +52,7 @@ function ShippingAddress() {
         townshipIndex,
       })
     );
-    navigate("/payment");
+    navigate("/paymentmethod");
   };
 
   useEffect(() => {

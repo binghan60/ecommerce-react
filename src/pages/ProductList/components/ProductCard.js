@@ -28,7 +28,7 @@ function ProductCard(props) {
   };
   return (
     <div>
-      <Link to={`/ProductList/${ProductData.slug}`}>
+      <Link to={`/productList/${ProductData.slug}`}>
         <img className="w-100 pb-3" src={`/imgs/${ProductData.image}`} alt="" />
       </Link>
       <h6>{ProductData.name}</h6>
@@ -36,10 +36,10 @@ function ProductCard(props) {
         rating={ProductData.rating}
         numReviews={ProductData.numReviews}
       ></Rating>
-      <p>
+      <div>
         <strong>{ProductData.price}元</strong>
         <span className="float-end">庫存尚有{ProductData.countInStock}份</span>
-      </p>
+      </div>
       <div className="text-center">
         {ProductData.countInStock === 0 ? (
           <Button variant="danger" disabled>
