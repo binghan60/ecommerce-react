@@ -59,8 +59,7 @@ function PlaceOrder() {
       );
       ctxDispatch({ type: "CART_CLEAR" });
       dispatch({ type: "CREAT_SUCCESS" });
-      localStorage.removeItem("cartItems");
-      navigate(`/order/${data.order._id}`);
+      navigate(`/orderpage/${data.order._id}`);
     } catch (err) {
       dispatch({ type: "CREAT_FAIL" });
       toast.error("暫時無法完成結帳，請稍後再試");
@@ -73,8 +72,6 @@ function PlaceOrder() {
   }, [cart, navigate]);
   return (
     <>
-      {console.log(cart.itemsPrice)}
-      {console.log(cart.shippingPrice)}
       <CheckoutSteps step1 step2 step3 step4></CheckoutSteps>
       <Container>
         <Helmet>訂單資訊確認</Helmet>
