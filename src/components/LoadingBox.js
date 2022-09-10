@@ -1,5 +1,5 @@
 function LoadingBox() {
-  return <></>;
+  return <>載入中</>;
 }
 
 export default LoadingBox;
