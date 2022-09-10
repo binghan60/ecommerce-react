@@ -11,6 +11,7 @@ import PaymentMethod from "./pages/CartPage/PaymentMethod";
 import CartPage from "./pages/CartPage/CartPage";
 import ShippingAddress from "./pages/CartPage/ShippingAddress";
 import PlaceOrder from "./pages/CartPage/PlaceOrder";
+import OrderPage from "./pages/CartPage/OrderPage";
 import Dashboard from "./pages/Dashboard/Dashboard";
 import { Container } from "react-bootstrap";
 import { Helmet } from "react-helmet-async";
@@ -36,6 +37,7 @@ function App() {
                 <Route path="/signup" element={<Signup />} />
                 <Route path="/paymentmethod" element={<PaymentMethod />} />
                 <Route path="/placeorder" element={<PlaceOrder />} />
+                <Route path="/orderpage/:id" element={<OrderPage />} />
                 <Route path="/productList/:slug" element={<ProductPage />} />
                 <Route path="/productList" element={<ProductList />} />
                 <Route path="/reserve" element={<Reserve />} />
