@@ -3,7 +3,6 @@ import { Link, useNavigate } from "react-router-dom";
 import { Store } from "../../Store";
 import { Helmet } from "react-helmet-async";
 import { Button, Card, ListGroup, Row, Col } from "react-bootstrap";
-import axios from "axios";
 
 function CartPage() {
   const navigate = useNavigate();
@@ -11,14 +10,8 @@ function CartPage() {
   const {
     cart: { cartItems },
   } = state;
-  const updateCartHandler = async (item, quantity) => {
-    const { data } = await axios.get(
-      `http://localhost:5000/api/products/${item._id}`
-    );
-    // if (data.countInStock < quantity) {
-    //   window.alert("商品無庫存");
-    //   return;
-    // }
+  const updateCartHandler = (item, quantity) => {
+
     ctxDispatch({
       type: "CART_ADD_ITEM",
       payload: { ...item, quantity },

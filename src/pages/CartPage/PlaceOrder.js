@@ -1,5 +1,5 @@
 import { useContext, useEffect, useReducer } from "react";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Button, Card, Col, Container, ListGroup, Row } from "react-bootstrap";
 import { Helmet } from "react-helmet-async";
 import CheckoutSteps from "./components/CheckoutSteps";

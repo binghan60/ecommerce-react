@@ -5,6 +5,8 @@ import LoadingBox from "../../components/LoadingBox";
 import { Store } from "../../Store";
 import axios from "axios";
 import { Card, Col, Row, ListGroup } from "react-bootstrap";
+import { PayPalButtons, usePayPalScriptReducer } from "@paypal/react-paypal-js";
+import { toast } from "react-toastify";
 
 function reducer(state, action) {
   switch (action.type) {
@@ -14,6 +16,14 @@ function reducer(state, action) {
       return { ...state, loading: false, order: action.payload, error: "" };
     case "FETCH_FAIL":
       return { ...state, loading: false, error: action.payload };
+    case "PAY_REQUEST":
+      return { ...state, loadingPay: true };
+    case "PAY_SUCCESS":
+      return { ...state, loadingPay: false, successPay: true };
+    case "PAY_FAIL":
+      return { ...state, loadingPay: false };
+    case "PAY_RESET":
+      return { ...state, loadingPay: false, successPay: false };
     default:
       return state;
   }
@@ -26,11 +36,52 @@ function OrderPage() {
   const params = useParams();
   //網址列ID重新命名orderId
   const { id: orderId } = params;
-  const [{ loading, error, order }, dispatch] = useReducer(reducer, {
-    loading: true,
-    order: {},
-    error: "",
-  });
+  //訂單資料用order接住
+  const [{ loading, error, order, successPay, loadingPay }, dispatch] =
+    useReducer(reducer, {
+      loading: true,
+      order: {},
+      error: "",
+      successPay: false,
+      loadingPay: false,
+    });
+  function createOrder(data, actions) {
+    return (
+      actions.order
+        .create({
+          //建立訂單 paypal支付的金額 為訂單總金額
+          purchase_units: [{ amount: { value: order.totalPrice } }],
+        })
+        //成功create order paypal回傳訂單ID
+        .then((orderID) => {
+          return orderID;
+        })
+    );
+  }
+  //付款成功後更新資料庫狀態
+  function onApprove(data, actions) {
+    return actions.order.capture().then(async function (details) {
+      try {
+        dispatch({ type: "PAY_REQUEST" });
+        const { data } = await axios.put(
+          `http://localhost:5000/api/orders/${order._id}/pay`,
+          details,
+          { headers: { authorization: `Bearer ${userInfo.token}` } }
+        );
+        dispatch({ type: "PAY_SUCCESS", payload: data });
+        toast.success("付款成功");
+      } catch (err) {
+        dispatch({ type: "PAY_FAIL", payload: "付款失敗" });
+        toast.error("付款失敗,請稍後再試");
+      }
+    });
+  }
+
+  function onError(err) {
+    toast.error("付款發生錯誤");
+  }
+
+  const [{ isPending }, paypalDispatch] = usePayPalScriptReducer();
 
   useEffect(() => {
     const fetchOrder = async () => {
@@ -48,14 +99,35 @@ function OrderPage() {
     if (!userInfo) {
       return navigate("/signin");
     }
-    if (!order._id || (order._id && order._id !== orderId)) {
+    //沒有訂單資料 抓訂單 或已付款 則抓資料更新狀態
+    if (!order._id || successPay || (order._id && order._id !== orderId)) {
       fetchOrder();
+      //如果付款成功表示 付款流程已經結束 動態監控的狀態重置 Ex.付款中、成功付款
+      if (successPay) {
+        dispatch({ type: "PAY_RESET" });
+      }
+    } else {
+//否則開始載入paypalscript 設定
+      const loadPayPalScript = async () => {
+        //抓paypal clientID
+        const { data: clientId } = await axios.get(
+          "http://localhost:5000/api/keys/paypal",
+          { headers: { authorization: `Bearer ${userInfo.token}` } }
+        );
+        //重置設定 設定clientId 跟幣別
+        paypalDispatch({
+          type: "resetOptions",
+          value: { "client-id": clientId, currency: "TWD" },
+        });
+        //設定狀態為待辦
+        paypalDispatch({ type: "setLoadingStatus", value: "pending" });
+      };
+      loadPayPalScript();
     }
-  }, [order, orderId, userInfo, navigate]);
+  }, [order, orderId, userInfo, navigate, paypalDispatch, successPay]);
 
   return (
     <>
-      {console.log("ordder_ID", order._id)}
       {loading ? (
         <LoadingBox></LoadingBox>
       ) : error ? (
@@ -95,7 +167,7 @@ function OrderPage() {
                     {order.paymentMethod}
                   </Card.Text>
                   {order.isPaid ? (
-                    <p>付款日期：{order.paidAt}</p>
+                    <p>已於{order.paidAt}付款</p>
                   ) : (
                     <p variant="danger">尚未付款</p>
                   )}
@@ -154,6 +226,27 @@ function OrderPage() {
                         <Col>${order.totalPrice}</Col>
                       </Row>
                     </ListGroup.Item>
+                    {/* 還沒付款才會出現 */}
+                    {!order.isPaid && (
+                      <ListGroup.Item>
+                        {isPending ? (
+                          <LoadingBox></LoadingBox>
+                        ) : (
+                          <div>
+                            <PayPalButtons
+                              //點擊按鈕時
+                              createOrder={createOrder}
+                              //成功付款時更新狀態
+                              onApprove={onApprove}
+                              //付款出現錯誤時
+                              onError={onError}
+                            >
+                            </PayPalButtons>
+                          </div>
+                        )}
+                        {loadingPay && <LoadingBox></LoadingBox>}
+                      </ListGroup.Item>
+                    )}
                   </ListGroup>
                 </Card.Body>
               </Card>
