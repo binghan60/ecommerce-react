@@ -1,7 +1,8 @@
 import { useContext } from "react";
 import { Link } from "react-router-dom";
-import {  Navbar, NavDropdown, Badge, Container } from "react-bootstrap";
+import { Nav, Navbar, NavDropdown, Badge, Container } from "react-bootstrap";
 import { Store } from "../Store";
+import { LinkContainer } from "react-router-bootstrap";
 
 function NavbarComponent() {
   const { state, dispatch: ctxDispatch } = useContext(Store);
@@ -12,38 +13,56 @@ function NavbarComponent() {
 
   return (
     <>
-      <Navbar className="mb-5">
+      <Navbar expand="lg" bg="warning" variant="light">
         <Container>
-          <Link to={"/"}>首頁</Link>
-          <Link to={"/productList"}>購物商城</Link>
-          <Link to={"/reserve"}>立即訂位</Link>
-          <Link to={"/cartpage"}>
-            購物車
-            {cart.cartItems.length > 0 && (
-              <Badge pill bg="danger">
-                {cart.cartItems.reduce((a, c) => a + c.quantity, 0)}
-              </Badge>
-            )}
-          </Link>
-          {userInfo ? (
-            <NavDropdown
-              menuVariant="dark"
-              title=<span style={{ color: "#fff" }}>{userInfo.name}</span>
-            >
-              <NavDropdown.Item>
-                <Link to={"/profile"}>會員中心</Link>
-              </NavDropdown.Item>
-              <NavDropdown.Item>
-                <Link to={"/orderhistory"}>歷史訂單</Link>
-              </NavDropdown.Item>
-              <NavDropdown.Divider />
-              <NavDropdown.Item onClick={logoutHandler}>
-                <Link to={"#logout"}>登出</Link>
-              </NavDropdown.Item>
-            </NavDropdown>
-          ) : (
-            <Link to={"/signin"}>會員登入</Link>
-          )}
+          <LinkContainer to="/">
+            <Navbar.Brand>MeowMeat</Navbar.Brand>
+          </LinkContainer>
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Collapse id="basic-navbar-nav">
+            <Nav className="me-auto  w-100  justify-content-end">
+              <Link className="nav-link" to={"/productList"}>
+                購物商城
+              </Link>
+              <Link className="nav-link" to={"/reserve"}>
+                立即訂位
+              </Link>
+              <Link className="nav-link" to="/cartpage">
+                購物車
+                {cart.cartItems.length > 0 && (
+                  <Badge pill bg="danger">
+                    {cart.cartItems.reduce((a, c) => a + c.quantity, 0)}
+                  </Badge>
+                )}
+              </Link>
+              {userInfo ? (
+                <NavDropdown
+                  id="basic-nav-dropdown"
+                  menuVariant="dark"
+                  title=<span>{userInfo.name}</span>
+                >
+                  <LinkContainer to="/memberprofile">
+                    <NavDropdown.Item>修改會員資料</NavDropdown.Item>
+                  </LinkContainer>
+                  <LinkContainer to="/orderhistory">
+                    <NavDropdown.Item>歷史訂單</NavDropdown.Item>
+                  </LinkContainer>
+                  <NavDropdown.Divider />
+                  <Link
+                    className="dropdown-item"
+                    to="#logout"
+                    onClick={logoutHandler}
+                  >
+                    登出
+                  </Link>
+                </NavDropdown>
+              ) : (
+                <Link className="nav-link" to="/signin">
+                  會員登入
+                </Link>
+              )}
+            </Nav>
+          </Navbar.Collapse>
         </Container>
       </Navbar>
     </>
