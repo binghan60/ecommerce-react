@@ -7,6 +7,7 @@ import ProductPage from "./pages/ProductList/ProductPage";
 import Reserve from "./pages/Reserve/Reserve";
 import Signin from "./pages/Member/Signin";
 import Signup from "./pages/Member/Signup";
+import MemberProfile from "./pages/Member/MemberProfile";
 import PaymentMethod from "./pages/CartPage/PaymentMethod";
 import CartPage from "./pages/CartPage/CartPage";
 import ShippingAddress from "./pages/CartPage/ShippingAddress";
@@ -17,6 +18,7 @@ import { Container } from "react-bootstrap";
 import { Helmet } from "react-helmet-async";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import OrderHistory from "./pages/CartPage/OrderHistory";
 function App() {
   return (
     <>
@@ -26,7 +28,7 @@ function App() {
         </Helmet>
         <ToastContainer position="bottom-center" limit={1} />
         <div className="d-flex flex-column site-container">
-          <header>
+          <header className="mb-5">
             <NavbarComponent />
           </header>
           <main>
@@ -35,9 +37,11 @@ function App() {
                 <Route path="/" element={<Home />} />
                 <Route path="/signin" element={<Signin />} />
                 <Route path="/signup" element={<Signup />} />
+                <Route path="/memberprofile" element={<MemberProfile />} />
                 <Route path="/paymentmethod" element={<PaymentMethod />} />
                 <Route path="/placeorder" element={<PlaceOrder />} />
                 <Route path="/orderpage/:id" element={<OrderPage />} />
+                <Route path="/orderhistory" element={<OrderHistory />}></Route>
                 <Route path="/productList/:slug" element={<ProductPage />} />
                 <Route path="/productList" element={<ProductList />} />
                 <Route path="/reserve" element={<Reserve />} />

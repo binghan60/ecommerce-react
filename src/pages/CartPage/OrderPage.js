@@ -40,8 +40,8 @@ function OrderPage() {
   const [{ loading, error, order, successPay, loadingPay }, dispatch] =
     useReducer(reducer, {
       loading: true,
-      order: {},
       error: "",
+      order: {},
       successPay: false,
       loadingPay: false,
     });
@@ -107,7 +107,7 @@ function OrderPage() {
         dispatch({ type: "PAY_RESET" });
       }
     } else {
-//否則開始載入paypalscript 設定
+      //否則開始載入paypalscript 設定
       const loadPayPalScript = async () => {
         //抓paypal clientID
         const { data: clientId } = await axios.get(
@@ -138,120 +138,122 @@ function OrderPage() {
             <title className="text-center">訂單編號：{orderId}</title>
           </Helmet>
           <h3>訂單編號：{orderId}</h3>
-          <Row>
-            <Col md={8}>
-              <Card className="mb-3">
-                <Card.Body>
-                  <Card.Title>訂購資訊</Card.Title>
-                  <Card.Text>
-                    <strong>姓名：</strong>
-                    {order.shippingAddress.fullName}
-                    <br />
-                    <strong>地址：</strong>
-                    {order.shippingAddress.country}
-                    {order.shippingAddress.township}
-                    {order.shippingAddress.address}
-                  </Card.Text>
-                  {order.isDeliverd ? (
-                    <p variant="success">已於{order.deliveredAt}送達</p>
-                  ) : (
-                    <p variant="danger">尚未送達</p>
-                  )}
-                </Card.Body>
-              </Card>
-              <Card className="mb-3">
-                <Card.Body>
-                  <Card.Title>付款資訊</Card.Title>
-                  <Card.Text>
-                    <strong>付款方式：</strong>
-                    {order.paymentMethod}
-                  </Card.Text>
-                  {order.isPaid ? (
-                    <p>已於{order.paidAt}付款</p>
-                  ) : (
-                    <p variant="danger">尚未付款</p>
-                  )}
-                </Card.Body>
-              </Card>
-              <Card>
-                <Card.Body>
-                  <Card.Title>購買商品</Card.Title>
-                  <ListGroup variant="flush">
-                    {order.orderItems.map((item) => {
-                      return (
-                        <ListGroup.Item key={item._id}>
-                          <Row className="align-items-center">
-                            <Col md={6}>
-                              <img
-                                className="w-50"
-                                src={`/imgs/${item.image}`}
-                                alt={item.name}
-                              ></img>
-                              <Link to={`/productlist/${item.slug}`}>
-                                {item.name}
-                              </Link>
-                            </Col>
-                            <Col md={3}>
-                              <span>{item.quantity}</span>
-                            </Col>
-                            <Col md={3}>${item.price}</Col>
-                          </Row>
-                        </ListGroup.Item>
-                      );
-                    })}
-                  </ListGroup>
-                </Card.Body>
-              </Card>
-            </Col>
-            <Col md={4}>
-              <Card className="mb-3">
-                <Card.Body>
-                  <Card.Title>訂單總計</Card.Title>
-                  <ListGroup variant="flush">
-                    <ListGroup.Item>
-                      <Row>
-                        <Col>商品</Col>
-                        <Col>${order.itemsPrice}</Col>
-                      </Row>
-                    </ListGroup.Item>
-                    <ListGroup.Item>
-                      <Row>
-                        <Col>運費</Col>
-                        <Col>${order.shippingPrice}</Col>
-                      </Row>
-                    </ListGroup.Item>
-                    <ListGroup.Item>
-                      <Row>
-                        <Col>總計</Col>
-                        <Col>${order.totalPrice}</Col>
-                      </Row>
-                    </ListGroup.Item>
-                    {/* 還沒付款才會出現 */}
-                    {!order.isPaid && (
-                      <ListGroup.Item>
-                        {isPending ? (
-                          <LoadingBox></LoadingBox>
-                        ) : (
-                          <div>
-                            <PayPalButtons
-                              //點擊按鈕時
-                              createOrder={createOrder}
-                              //成功付款時更新狀態
-                              onApprove={onApprove}
-                              //付款出現錯誤時
-                              onError={onError}
-                            >
-                            </PayPalButtons>
-                          </div>
-                        )}
-                        {loadingPay && <LoadingBox></LoadingBox>}
-                      </ListGroup.Item>
+          <div className="orderpage">
+            <Row>
+              <Col md={8}>
+                <Card className="mb-3">
+                  <Card.Body>
+                    <Card.Title>訂購資訊</Card.Title>
+                    <Card.Text>
+                      <strong>姓名：</strong>
+                      {order.shippingAddress.fullName}
+                      <br />
+                      <strong>地址：</strong>
+                      {order.shippingAddress.country}
+                      {order.shippingAddress.township}
+                      {order.shippingAddress.address}
+                    </Card.Text>
+                    <strong>配送狀態：</strong>
+                    {order.isDeliverd ? (
+                      <span variant="success">已於{order.deliveredAt}送達</span>
+                    ) : (
+                      <span variant="danger">尚未送達</span>
                     )}
-                  </ListGroup>
-                </Card.Body>
-              </Card>
-            </Col>
-          </Row>
+                  </Card.Body>
+                </Card>
+                <Card className="mb-3">
+                  <Card.Body>
+                    <Card.Title>付款資訊</Card.Title>
+                    <Card.Text>
+                      <strong>付款方式：</strong>
+                      {order.paymentMethod}
+                    </Card.Text>
+                    {order.isPaid ? (
+                      <p>已於{order.paidAt.substring(0, 10)}付款</p>
+                    ) : (
+                      <p variant="danger">尚未付款</p>
+                    )}
+                  </Card.Body>
+                </Card>
+                <Card>
+                  <Card.Body>
+                    <Card.Title>購買商品</Card.Title>
+                    <ListGroup variant="flush">
+                      {order.orderItems.map((item) => {
+                        return (
+                          <ListGroup.Item key={item._id}>
+                            <Row className="align-items-center">
+                              <Col md={6}>
+                                <img
+                                  className="w-50"
+                                  src={`/imgs/${item.image}`}
+                                  alt={item.name}
+                                ></img>
+                                <Link to={`/productlist/${item.slug}`}>
+                                  {item.name}
+                                </Link>
+                              </Col>
+                              <Col md={3}>
+                                <span>{item.quantity}</span>
+                              </Col>
+                              <Col md={3}>${item.price}</Col>
+                            </Row>
+                          </ListGroup.Item>
+                        );
+                      })}
+                    </ListGroup>
+                  </Card.Body>
+                </Card>
+              </Col>
+              <Col md={4}>
+                <Card className="mb-3">
+                  <Card.Body>
+                    <Card.Title>訂單總計</Card.Title>
+                    <ListGroup variant="flush">
+                      <ListGroup.Item>
+                        <Row>
+                          <Col>商品</Col>
+                          <Col>${order.itemsPrice}</Col>
+                        </Row>
+                      </ListGroup.Item>
+                      <ListGroup.Item>
+                        <Row>
+                          <Col>運費</Col>
+                          <Col>${order.shippingPrice}</Col>
+                        </Row>
+                      </ListGroup.Item>
+                      <ListGroup.Item>
+                        <Row>
+                          <Col>總計</Col>
+                          <Col>${order.totalPrice}</Col>
+                        </Row>
+                      </ListGroup.Item>
+                      {/* 還沒付款才會出現 */}
+                      {!order.isPaid && (
+                        <ListGroup.Item>
+                          {isPending ? (
+                            <LoadingBox></LoadingBox>
+                          ) : (
+                            <div>
+                              <PayPalButtons
+                                //點擊按鈕時
+                                createOrder={createOrder}
+                                //成功付款時更新狀態
+                                onApprove={onApprove}
+                                //付款出現錯誤時
+                                onError={onError}
+                              ></PayPalButtons>
+                            </div>
+                          )}
+                          {loadingPay && <LoadingBox></LoadingBox>}
+                        </ListGroup.Item>
+                      )}
+                    </ListGroup>
+                  </Card.Body>
+                </Card>
+              </Col>
+            </Row>
+          </div>
         </>
       )}
     </>

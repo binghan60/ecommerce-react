@@ -3,6 +3,7 @@ body {
   background-color: #000;
   font-family: "Noto Sans TC", sans-serif;
   font-family: "Roboto", sans-serif;
+  color: #fff;
 }
 
 main {
@@ -17,20 +18,21 @@ a {
   min-height: 100vh;
 }
 
-nav {
+header {
   background-color: #664000;
-  height: 3rem;
-  line-height: 3rem;
-  font-size: 1.5rem;
+}
+header a {
+  color: #fff;
+}
+
+nav {
+  height: 3.5rem;
+  font-size: 1.25rem;
   font-weight: bold;
 }
 nav a {
-  color: #fff;
   text-decoration: none;
-}
-
-nav-link {
-  color: #fff;
+  color: aliceblue;
 }
 
 .rating span {
@@ -46,4 +48,8 @@ nav-link {
 .checkout-steps > div.active {
   border-bottom: 0.2rem solid #f08000;
   color: #f08000;
+}
+
+.orderpage {
+  color: black;
 }/*# sourceMappingURL=index.css.map */

@@ -28,7 +28,7 @@ function Signup() {
   const submitHandler = async (e) => {
     e.preventDefault();
     if (password !== confirmPassword) {
-      toast.error("密碼需一致");
+      toast.error("密碼確認需相同");
       return;
     }
     try {
