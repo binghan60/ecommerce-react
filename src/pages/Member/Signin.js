@@ -12,7 +12,7 @@ import axios from "axios";
 function Signin() {
   const navigate = useNavigate();
   const { search } = useLocation();
-  //search是整串query string ?redirect=值
+  //search是useLocation下的變數代表整串query string ?redirect=值
   const redirectInUrl = new URLSearchParams(search).get("redirect");
   //redirectInUrl是query string裡的redirect=值
   const redirect = redirectInUrl ? redirectInUrl : "/";
