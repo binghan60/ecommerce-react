@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 function SearchBox() {
   const navigate = useNavigate();
-  const [query, setQuery] = useState();
+  const [query, setQuery] = useState("");
   const submitHandler = (e) => {
     e.preventDefault();
     navigate(query ? `/search/?query=${query}` : "/search");
@@ -21,7 +21,7 @@ function SearchBox() {
           aria-label="Search Products"
           aria-describedby="button-search"
         ></FormControl>
-        <Button variant="outline-primary" type="sumbit" id="button-search">
+        <Button variant="warning" type="sumbit" id="button-search">
           <i className="fas fa-search"></i>
         </Button>
       </InputGroup>
