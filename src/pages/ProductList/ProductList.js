@@ -17,8 +17,10 @@ function ProductList() {
   return (
     <>
       <h3>商品列表</h3>
-      <SearchBox></SearchBox>
-      <main className="d-flex">
+      <div>
+        <SearchBox />
+      </div>
+      <main className="d-flex mt-5">
         <Row>
           {ProductData.map((ProductData) => {
             return (
