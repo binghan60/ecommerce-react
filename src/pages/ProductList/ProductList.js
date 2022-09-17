@@ -20,17 +20,21 @@ function ProductList() {
       <div>
         <SearchBox />
       </div>
-      <main className="d-flex mt-5">
-        <Row>
-          {ProductData.map((ProductData) => {
-            return (
-              <Col sm={6} md={4} lg={3} className="mb-4" key={ProductData.slug}>
-                <ProductCard ProductData={ProductData}></ProductCard>
-              </Col>
-            );
-          })}
-        </Row>
-      </main>
+      <Row>
+        <Col md={3}>篩選面板</Col>
+        <Col md={9}>
+          <Row>
+            {ProductData.map((ProductData) => {
+              return (
+                <Col sm={6} md={4} className="mb-4" key={ProductData.slug}>
+                  <ProductCard ProductData={ProductData}></ProductCard>
+                </Col>
+              );
+            })}
+          </Row>{" "}
+        </Col>
+      </Row>
+      <main className="mt-5"></main>
     </>
   );
 }
