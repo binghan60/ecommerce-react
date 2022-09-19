@@ -13,12 +13,14 @@ import CartPage from "./pages/CartPage/CartPage";
 import ShippingAddress from "./pages/CartPage/ShippingAddress";
 import PlaceOrder from "./pages/CartPage/PlaceOrder";
 import OrderPage from "./pages/CartPage/OrderPage";
-import Dashboard from "./pages/Dashboard/Dashboard";
+import OrderHistory from "./pages/CartPage/OrderHistory";
+import Dashboard from "./pages/Admin/Dashboard";
 import { Container } from "react-bootstrap";
 import { Helmet } from "react-helmet-async";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import OrderHistory from "./pages/CartPage/OrderHistory";
+import ProtectedRoute from "./components/ProtectedRoute";
+import AdminRoute from "./components/AdminRoute";
 function App() {
   return (
     <>
@@ -37,17 +39,65 @@ function App() {
                 <Route path="/" element={<Home />} />
                 <Route path="/signin" element={<Signin />} />
                 <Route path="/signup" element={<Signup />} />
-                <Route path="/memberprofile" element={<MemberProfile />} />
+                <Route
+                  path="/memberprofile"
+                  element={
+                    <ProtectedRoute>
+                      <MemberProfile />
+                    </ProtectedRoute>
+                  }
+                />
                 <Route path="/paymentmethod" element={<PaymentMethod />} />
                 <Route path="/placeorder" element={<PlaceOrder />} />
-                <Route path="/orderpage/:id" element={<OrderPage />} />
-                <Route path="/orderhistory" element={<OrderHistory />}></Route>
-                <Route path="/productList/:slug" element={<ProductPage />} />
-                <Route path="/productList" element={<ProductList />} />
+                <Route
+                  path="/orderpage/:id"
+                  element={
+                    <ProtectedRoute>
+                      <OrderPage />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route
+                  path="/orderhistory"
+                  element={
+                    <ProtectedRoute>
+                      <OrderHistory />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route path="/productlist/:slug" element={<ProductPage />} />
+                <Route path="/productlist" element={<ProductList />} />
                 <Route path="/reserve" element={<Reserve />} />
                 <Route path="/cartpage" element={<CartPage />} />
                 <Route path="/shippingaddress" element={<ShippingAddress />} />
-                <Route path="/dashboard" element={<Dashboard />} />
+                <Route
+                  path="/admin/dashboard"
+                  element={
+                    <AdminRoute>
+                      <Dashboard />
+                    </AdminRoute>}
+                />
+                <Route
+                  path="/admin/productmanagement"
+                  element={
+                    <AdminRoute>
+                      <Dashboard />
+                    </AdminRoute>}
+                />
+                <Route
+                  path="/admin/ordermanagement"
+                  element={
+                    <AdminRoute>
+                      <Dashboard />
+                    </AdminRoute>}
+                />
+                <Route
+                  path="/admin/usermanagement"
+                  element={
+                    <AdminRoute>
+                      <Dashboard />
+                    </AdminRoute>}
+                />
               </Routes>
             </Container>
           </main>
