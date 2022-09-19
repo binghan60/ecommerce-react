@@ -104,9 +104,6 @@ function Signup() {
           已經有帳號了嗎?
           <Link to={`/signin?redirect=${redirect}`}>點選登入</Link>
         </div>
-        <div className="text-center mt-4">
-          <Link to={"/dashboard"}>管理者登入</Link>
-        </div>
       </Form>
     </Container>
   );

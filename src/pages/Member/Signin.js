@@ -32,7 +32,7 @@ function Signin() {
       );
       ctxDispatch({ type: "USER_SIGNIN", payload: data });
       localStorage.setItem("userInfo", JSON.stringify(data));
-      //如果redirect不存在 回首頁
+      //登入成功如果redirect不存在 回首頁
       navigate(redirect || "/");
     } catch (err) {
       toast.error("帳號密碼錯誤");
@@ -53,7 +53,7 @@ function Signin() {
       <Form className="mt-5" onSubmit={submitHandler}>
         <Form.Group>
           <Form.Label>
-            <h4>Email</h4>
+            <h4>電子信箱</h4>
           </Form.Label>
           <Form.Control
             type="email"
@@ -63,7 +63,7 @@ function Signin() {
         </Form.Group>
         <Form.Group>
           <Form.Label>
-            <h4>Password</h4>
+            <h4>密碼</h4>
           </Form.Label>
           <Form.Control
             type="Password"
@@ -72,14 +72,14 @@ function Signin() {
           ></Form.Control>
         </Form.Group>
         <div className="text-center my-4">
-          <Button type="submit">Sing In</Button>
+          <Button type="submit">登入</Button>
         </div>
         <div className="text-center">
           還沒有帳號嗎?
           <Link to={`/signup?redirect=${redirect}`}>快註冊一個吧</Link>
         </div>
         <div className="text-center mt-4">
-          <Link to={"/dashboard"}>管理者登入</Link>
+          <Link to={"/admin/dashboard"}>管理者登入</Link>
         </div>
       </Form>
     </Container>

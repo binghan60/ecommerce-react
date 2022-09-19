@@ -1,5 +1,5 @@
 function Rating(props) {
-  const { rating, numReviews } = props;
+  const { rating, numReviews, ratingTitle } = props;
   return (
     <div className="d-flex justify-content-between">
       <div className="rating">
@@ -59,11 +59,9 @@ function Rating(props) {
           ></i>
         </span>
       </div>
-      <span>{numReviews}人也看過</span>
+      {ratingTitle ? <span>{ratingTitle}</span> : <span>{numReviews}人也看過</span>}
     </div>
-
   );
 }
 
-
-export default Rating
+export default Rating;
