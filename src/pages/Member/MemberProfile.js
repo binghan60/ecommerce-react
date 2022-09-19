@@ -21,7 +21,6 @@ const reducer = (state, action) => {
 function MemberProfile() {
   const { state, dispatch: ctxDispatch } = useContext(Store);
   const { userInfo } = state;
-  console.log(userInfo.email);
   const [name, setName] = useState(userInfo.name);
   const [email, setEmail] = useState(userInfo.email);
   const [password, setPassword] = useState("");
