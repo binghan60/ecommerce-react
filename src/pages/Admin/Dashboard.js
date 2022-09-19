@@ -3,7 +3,7 @@ function Dashboard() {
   return (
     <>
       <Helmet>
-        <title className="text-center">管理後臺</title>
+        <title className="text-center">管理面板</title>
       </Helmet>
       <h3>dashboard</h3>
     </>

@@ -7,10 +7,10 @@ function SearchBox() {
   const [query, setQuery] = useState("");
   const submitHandler = (e) => {
     e.preventDefault();
-    navigate(query ? `/search/?query=${query}` : "/search");
+    navigate(query ? `/productlist/?query=${query}` : "/productlist");
   };
   return (
-    <Form className="d-flex me-auto">
+    <Form className="d-flex me-auto" onSubmit={submitHandler}>
       <InputGroup>
         <FormControl
           type="text"
