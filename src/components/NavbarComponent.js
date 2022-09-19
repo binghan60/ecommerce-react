@@ -18,10 +18,11 @@ function NavbarComponent() {
           <LinkContainer to="/">
             <Navbar.Brand>MeowMeat</Navbar.Brand>
           </LinkContainer>
+          {/* 漢堡 */}
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="me-auto  w-100  justify-content-end">
-              <Link className="nav-link" to={"/productList"}>
+            <Nav className="me-auto w-100 justify-content-end">
+              <Link className="nav-link" to={"/productlist"}>
                 購物商城
               </Link>
               <Link className="nav-link" to={"/reserve"}>
@@ -35,11 +36,31 @@ function NavbarComponent() {
                   </Badge>
                 )}
               </Link>
+              {userInfo && userInfo.isAdmin && (
+                <NavDropdown
+                  id="basic-nav-dropdown"
+                  menuVariant="dark"
+                  title="管理功能"
+                >
+                  <LinkContainer to="/admin/dashboard">
+                    <NavDropdown.Item>管理面板</NavDropdown.Item>
+                  </LinkContainer>
+                  <LinkContainer to="/admin/productlist">
+                    <NavDropdown.Item>商品管理</NavDropdown.Item>
+                  </LinkContainer>
+                  <LinkContainer to="/admin/orderlist">
+                    <NavDropdown.Item>訂單管理</NavDropdown.Item>
+                  </LinkContainer>
+                  <LinkContainer to="/admin/userlist">
+                    <NavDropdown.Item>用戶管理</NavDropdown.Item>
+                  </LinkContainer>
+                </NavDropdown>
+              )}
               {userInfo ? (
                 <NavDropdown
                   id="basic-nav-dropdown"
                   menuVariant="dark"
-                  title=<span>{userInfo.name}</span>
+                  title={userInfo.name}
                 >
                   <LinkContainer to="/memberprofile">
                     <NavDropdown.Item>修改會員資料</NavDropdown.Item>
