@@ -21,7 +21,8 @@ import { Helmet } from "react-helmet-async";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import AdminRoute from "./components/AdminRoute";
-import AdminProduts from "./pages/Admin/AdminProduts";
+import AdminProducts from "./pages/Admin/AdminProducts";
+import ProductEdit from "./pages/Admin/ProductEdit";
 function App() {
   return (
     <>
@@ -82,16 +83,17 @@ function App() {
                   path="/admin/adminproducts"
                   element={
                     <AdminRoute>
-                      <AdminProduts />
+                      <AdminProducts />
                     </AdminRoute>}
                 />
                 <Route
-                  path="/admin/productmanagement"
+                  path="/admin/adminproducts/:id"
                   element={
                     <AdminRoute>
-                      <Dashboard />
+                      <ProductEdit />
                     </AdminRoute>}
                 />
+
                 <Route
                   path="/admin/ordermanagement"
                   element={
