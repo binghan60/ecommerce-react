@@ -5,6 +5,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import LoadingBox from "../../components/LoadingBox";
 import { Store } from "../../Store";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -14,6 +15,12 @@ const reducer = (state, action) => {
       return { ...state, loading: false };
     case "FETRCH_FAIL":
       return { ...state, loading: false, error: action.payload };
+    case "UPDATE_REQUEST":
+      return { ...state, loadingUpdate: true };
+    case "UPDATE_SUCCESS":
+      return { ...state, loadingUpdate: false };
+    case "UPDATE_FAIL":
+      return { ...state, loadingUpdate: false };
     default:
       return state;
   }
@@ -25,7 +32,7 @@ function ProductEdit() {
   const { id: productId } = params; //id rename成productId
   const { state, dispatch: ctxDispatch } = useContext(Store);
   const { userInfo } = state;
-  const [{ loading, error }, dispatch] = useReducer(reducer, {
+  const [{ loading, error, loadingUpdate }, dispatch] = useReducer(reducer, {
     loading: true,
     error: "",
   });
@@ -64,6 +71,35 @@ function ProductEdit() {
     };
     fetchData();
   }, [productId]);
+
+  const submitHandler = async (e) => {
+    e.preventDefault();
+    try {
+      dispatch({ type: "UPDATE_REQUEST" });
+      await axios.put(
+        //不會回傳 不需要用變數接
+        `http://localhost:5000/api/products/${productId}`,
+        {
+          _id: productId,
+          name,
+          slug,
+          price,
+          image,
+          category,
+          brand,
+          countInStock,
+          description,
+        },
+        { headers: { authorization: `Bearer ${userInfo.token}` } }
+      );
+      dispatch({ type: "UPDATE_SUCCESS" });
+      toast.success("修改成功");
+      navigate("/admin/adminproducts");
+    } catch (err) {
+      toast.error("修改失敗");
+      dispatch({ type: "UPDATE_FAIL" });
+    }
+  };
   return (
     <Container className="w-50">
       <Helmet>
@@ -75,7 +111,7 @@ function ProductEdit() {
       ) : error ? (
         "發生錯誤"
       ) : (
-        <Form>
+        <Form onSubmit={submitHandler}>
           <Form.Group>
             <Form.Label>商品名稱</Form.Label>
             <Form.Control
@@ -140,8 +176,11 @@ function ProductEdit() {
               required
             />
           </Form.Group>
-          <div className="mb-3">
-            <Button type="submit">送出修改</Button>
+          <div className="my-4 text-center">
+            <Button disabled={loadingUpdate} type="submit">
+              送出修改
+            </Button>
+            {loadingUpdate && <LoadingBox></LoadingBox>}
           </div>
         </Form>
       )}
