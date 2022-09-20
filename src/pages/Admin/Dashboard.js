@@ -28,7 +28,7 @@ function Dashboard() {
   });
 
   useEffect(() => {
-    const fetchdata = async () => {
+    const fetchData = async () => {
       try {
         dispatch({ type: "FETCH_REQUEST" });
         const { data } = await axios.get(
@@ -40,7 +40,7 @@ function Dashboard() {
         dispatch({ type: "FETCH_FAIL", payload: "抓取資料失敗" });
       }
     };
-    fetchdata();
+    fetchData();
   }, [userInfo]);
 
   return (

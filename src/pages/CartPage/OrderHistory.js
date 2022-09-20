@@ -66,7 +66,7 @@ function OrderHistory() {
               <th>金額</th>
               <th>付款狀態</th>
               <th>配送資訊</th>
-              <th>訂單明細</th>
+              <th>功能</th>
             </tr>
           </thead>
           <tbody>
@@ -91,7 +91,7 @@ function OrderHistory() {
                       navigate(`/orderpage/${order._id}`);
                     }}
                   >
-                    查看訂單
+                    訂單明細
                   </Button>
                 </td>
               </tr>

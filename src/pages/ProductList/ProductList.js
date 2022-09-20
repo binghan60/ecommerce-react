@@ -278,7 +278,7 @@ function SearchPage() {
                 {[...Array(pages).keys()].map((x) => (
                   <LinkContainer
                     key={x + 1}
-                    className="mx-1"
+                    className="mx-2"
                     to={getFilterUrl({ page: x + 1 })}
                   >
                     <Button
