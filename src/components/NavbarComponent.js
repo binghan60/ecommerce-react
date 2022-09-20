@@ -45,7 +45,8 @@ function NavbarComponent() {
                   <LinkContainer to="/admin/dashboard">
                     <NavDropdown.Item>管理面板</NavDropdown.Item>
                   </LinkContainer>
-                  <LinkContainer to="/admin/productlist">
+
+                  <LinkContainer to="/admin/adminproducts">
                     <NavDropdown.Item>商品管理</NavDropdown.Item>
                   </LinkContainer>
                   <LinkContainer to="/admin/orderlist">

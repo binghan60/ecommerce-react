@@ -45,7 +45,6 @@ function Dashboard() {
 
   return (
     <>
-      {console.log(summary)}
       <Helmet>
         <title className="text-center">管理面板</title>
       </Helmet>
@@ -115,7 +114,7 @@ function Dashboard() {
             )}
           </div>
           <div className="my-3">
-            <h5 style={{ color: "#fff" }}>商品種類分布</h5>
+            <h5 style={{ color: "#fff" }}>全站商品種類佔比</h5>
             {summary.productCategories.length === 0 ? (
               "尚未有訂單"
             ) : (

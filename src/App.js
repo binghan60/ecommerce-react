@@ -15,12 +15,13 @@ import PlaceOrder from "./pages/CartPage/PlaceOrder";
 import OrderPage from "./pages/CartPage/OrderPage";
 import OrderHistory from "./pages/CartPage/OrderHistory";
 import Dashboard from "./pages/Admin/Dashboard";
+import ProtectedRoute from "./components/ProtectedRoute";
 import { Container } from "react-bootstrap";
 import { Helmet } from "react-helmet-async";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import ProtectedRoute from "./components/ProtectedRoute";
 import AdminRoute from "./components/AdminRoute";
+import AdminProduts from "./pages/Admin/AdminProduts";
 function App() {
   return (
     <>
@@ -75,6 +76,13 @@ function App() {
                   element={
                     <AdminRoute>
                       <Dashboard />
+                    </AdminRoute>}
+                />
+                <Route
+                  path="/admin/adminproducts"
+                  element={
+                    <AdminRoute>
+                      <AdminProduts />
                     </AdminRoute>}
                 />
                 <Route
