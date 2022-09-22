@@ -112,7 +112,6 @@ function ProductEdit() {
     const bodyFormData = new FormData();
     bodyFormData.append("file", file); //裝進formdata
     try {
-      console.log("上傳");
       dispatch({ type: "UPLOAD_REQUEST" });
       const { data } = await axios.post(
         "http://localhost:5000/api/upload",
@@ -124,7 +123,6 @@ function ProductEdit() {
           },
         }
       );
-      console.log("上傳結束");
       dispatch({ type: "UPLOAD_SUCCESS" });
       toast.success("上傳成功");
       setImage(data.secure_url);

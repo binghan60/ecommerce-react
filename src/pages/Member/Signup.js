@@ -22,8 +22,6 @@ function Signup() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  console.log("search", search);
-  console.log("redirectInUrl", redirectInUrl);
   //登入 送出表單
   const submitHandler = async (e) => {
     e.preventDefault();

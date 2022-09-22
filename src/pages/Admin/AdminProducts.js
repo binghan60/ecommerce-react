@@ -123,7 +123,6 @@ function AdminProducts() {
         toast.success("刪除成功");
         dispatch({ type: "DELETE_SUCCESS" });
       } catch (err) {
-        console.log(product._id);
         toast.error("刪除失敗");
         dispatch({ type: "DELETE_FAIL" });
       }
