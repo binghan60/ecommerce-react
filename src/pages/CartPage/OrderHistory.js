@@ -80,7 +80,7 @@ function OrderHistory() {
                 </td>
                 <td>
                   {order.isDelivered
-                    ? order.isDeliveredAt.substring(0, 10)
+                    ? order.deliveredAt.substring(0, 10)
                     : "尚未送達"}
                 </td>
                 <td>
