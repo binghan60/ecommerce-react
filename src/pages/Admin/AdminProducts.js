@@ -52,8 +52,8 @@ function AdminProducts() {
   const page = sp.get("page") || 1;
   useEffect(() => {
     const fetchData = async () => {
-      dispatch({ type: "FETCH_REQUEST" });
       try {
+        dispatch({ type: "FETCH_REQUEST" });
         const { data } = await axios.get(
           `http://localhost:5000/api/products/admin?page=${page}`,
           {
