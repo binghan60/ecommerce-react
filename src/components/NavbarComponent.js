@@ -49,7 +49,7 @@ function NavbarComponent() {
                   <LinkContainer to="/admin/adminproducts">
                     <NavDropdown.Item>商品管理</NavDropdown.Item>
                   </LinkContainer>
-                  <LinkContainer to="/admin/orderlist">
+                  <LinkContainer to="/admin/adminorders">
                     <NavDropdown.Item>訂單管理</NavDropdown.Item>
                   </LinkContainer>
                   <LinkContainer to="/admin/userlist">

@@ -23,6 +23,7 @@ import "react-toastify/dist/ReactToastify.css";
 import AdminRoute from "./components/AdminRoute";
 import AdminProducts from "./pages/Admin/AdminProducts";
 import ProductEdit from "./pages/Admin/ProductEdit";
+import AdminOrders from "./pages/Admin/AdminOrders";
 function App() {
   return (
     <>
@@ -77,36 +78,41 @@ function App() {
                   element={
                     <AdminRoute>
                       <Dashboard />
-                    </AdminRoute>}
+                    </AdminRoute>
+                  }
                 />
                 <Route
                   path="/admin/adminproducts"
                   element={
                     <AdminRoute>
                       <AdminProducts />
-                    </AdminRoute>}
+                    </AdminRoute>
+                  }
                 />
                 <Route
                   path="/admin/adminproducts/:id"
                   element={
                     <AdminRoute>
                       <ProductEdit />
-                    </AdminRoute>}
+                    </AdminRoute>
+                  }
                 />
 
                 <Route
-                  path="/admin/ordermanagement"
+                  path="/admin/adminorders"
                   element={
                     <AdminRoute>
-                      <Dashboard />
-                    </AdminRoute>}
+                      <AdminOrders />
+                    </AdminRoute>
+                  }
                 />
                 <Route
                   path="/admin/usermanagement"
                   element={
                     <AdminRoute>
                       <Dashboard />
-                    </AdminRoute>}
+                    </AdminRoute>
+                  }
                 />
               </Routes>
             </Container>
