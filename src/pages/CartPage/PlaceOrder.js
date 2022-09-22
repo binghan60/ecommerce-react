@@ -73,7 +73,7 @@ function PlaceOrder() {
   return (
     <>
       <CheckoutSteps step1 step2 step3 step4></CheckoutSteps>
-      <Container>
+      <Container className="text-black">
         <Helmet>訂單資訊確認</Helmet>
         <h3>訂單資訊確認</h3>
         <Row>
@@ -84,7 +84,8 @@ function PlaceOrder() {
                 <Card.Text>
                   <strong>姓名：</strong>
                   {cart.shippingAddress.fullName}
-                  <strong>地址：</strong> {cart.shippingAddress.country}
+                  <br />
+                  <strong>地址：</strong>{cart.shippingAddress.country}
                   {cart.shippingAddress.township}
                   {cart.shippingAddress.address}
                 </Card.Text>
