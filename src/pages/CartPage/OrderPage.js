@@ -4,7 +4,7 @@ import { Helmet } from "react-helmet-async";
 import LoadingBox from "../../components/LoadingBox";
 import { Store } from "../../Store";
 import axios from "axios";
-import { Card, Col, Row, ListGroup } from "react-bootstrap";
+import { Card, Col, Row, ListGroup, Button } from "react-bootstrap";
 import { PayPalButtons, usePayPalScriptReducer } from "@paypal/react-paypal-js";
 import { toast } from "react-toastify";
 
@@ -24,6 +24,14 @@ function reducer(state, action) {
       return { ...state, loadingPay: false };
     case "PAY_RESET":
       return { ...state, loadingPay: false, successPay: false };
+    case "DELIVER_REQUEST":
+      return { ...state, loadingDeliver: true };
+    case "DELIVER_SUCCESS":
+      return { ...state, loadingDeliver: false, successDeliver: true };
+    case "DELIVER_FAIL":
+      return { ...state, loadingDeliver: false };
+    case "DELIVER_RESET":
+      return { ...state, loadingDeliver: false, successDeliver: false };
     default:
       return state;
   }
@@ -37,14 +45,24 @@ function OrderPage() {
   //網址列ID重新命名orderId
   const { id: orderId } = params;
   //訂單資料用order接住
-  const [{ loading, error, order, successPay, loadingPay }, dispatch] =
-    useReducer(reducer, {
-      loading: true,
-      error: "",
-      order: {},
-      successPay: false,
-      loadingPay: false,
-    });
+  const [
+    {
+      loading,
+      error,
+      order,
+      successPay,
+      loadingPay,
+      loadingDeliver,
+      successDeliver,
+    },
+    dispatch,
+  ] = useReducer(reducer, {
+    loading: true,
+    error: "",
+    order: {},
+    successPay: false,
+    loadingPay: false,
+  });
   function createOrder(data, actions) {
     return (
       actions.order
@@ -100,11 +118,19 @@ function OrderPage() {
       return navigate("/signin");
     }
     //沒有訂單資料 抓訂單 或已付款 則抓資料更新狀態
-    if (!order._id || successPay || (order._id && order._id !== orderId)) {
+    if (
+      !order._id ||
+      successPay ||
+      successDeliver ||
+      (order._id && order._id !== orderId)
+    ) {
       fetchOrder();
       //如果付款成功表示 付款流程已經結束 動態監控的狀態重置 Ex.付款中、成功付款
       if (successPay) {
         dispatch({ type: "PAY_RESET" });
+      }
+      if (successDeliver) {
+        dispatch({ type: "DELIVER_RESET" });
       }
     } else {
       //否則開始載入paypalscript 設定
@@ -124,8 +150,33 @@ function OrderPage() {
       };
       loadPayPalScript();
     }
-  }, [order, orderId, userInfo, navigate, paypalDispatch, successPay]);
+  }, [
+    order,
+    orderId,
+    userInfo,
+    navigate,
+    paypalDispatch,
+    successPay,
+    successDeliver,
+  ]);
 
+  async function deliverFinishHandler() {
+    try {
+      dispatch({ type: "DELIVER_REQUEST" });
+      const { data } = await axios.put(
+        `http://localhost:5000/api/orders/${order._id}/deliver`,
+        {},
+        {
+          headers: { authorization: `Bearer ${userInfo.token}` },
+        }
+      );
+      dispatch({ type: "DELIVER_SUCCESS", payload: data });
+      toast.success("配送成功");
+    } catch (err) {
+      toast.error("配送失敗");
+      dispatch({ type: "DELIVER_FAIL" });
+    }
+  }
   return (
     <>
       {loading ? (
@@ -138,7 +189,7 @@ function OrderPage() {
             <title className="text-center">訂單編號：{orderId}</title>
           </Helmet>
           <h3>訂單編號：{orderId}</h3>
-          <div className="orderpage">
+          <div className="text-black">
             <Row>
               <Col md={8}>
                 <Card className="mb-3">
@@ -246,6 +297,20 @@ function OrderPage() {
                             </div>
                           )}
                           {loadingPay && <LoadingBox></LoadingBox>}
+                        </ListGroup.Item>
+                      )}
+                      {/* 管理者  已付款  尚未送達 */}
+                      {userInfo.isAdmin && order.isPaid && !order.isDelivered && (
+                        <ListGroup.Item>
+                          {loadingDeliver && <LoadingBox></LoadingBox>}
+                          <div className="d-grid">
+                            <Button
+                              type="button"
+                              onClick={deliverFinishHandler}
+                            >
+                              完成配送
+                            </Button>
+                          </div>
                         </ListGroup.Item>
                       )}
                     </ListGroup>
