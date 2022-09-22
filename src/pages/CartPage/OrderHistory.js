@@ -33,8 +33,8 @@ function OrderHistory() {
 
   useEffect(() => {
     const fetchData = async () => {
-      dispatch({ type: "FETCH_REQUEST" });
       try {
+        dispatch({ type: "FETCH_REQUEST" });
         const { data } = await axios.get(
           "http://localhost:5000/api/orders/mine",
           { headers: { authorization: `Bearer ${userInfo.token}` } }
