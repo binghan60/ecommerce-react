@@ -32,6 +32,14 @@ const reducer = (state, action) => {
       return { ...state, loadingCreate: false };
     case "CREATE_FAIL":
       return { ...state, loadingCreate: false };
+    case "DELETE_REQUEST":
+      return { ...state, loadingDelete: true, successDelete: false };
+    case "DELETE_SUCCESS":
+      return { ...state, loadingDelete: false, successDelete: true };
+    case "DELETE_FAIL":
+      return { ...state, loadingDelete: false, successDelete: false };
+    case "DELETE_RESET":
+      return { ...state, loadingDelete: false, successDelete: false };
     default:
       return state;
   }
@@ -41,15 +49,26 @@ function AdminProducts() {
   const navigate = useNavigate();
   const { state, dispatch: ctxDispatch } = useContext(Store);
   const { userInfo } = state;
-  const [{ loading, error, products, pages, loadingCreate }, dispatch] =
-    useReducer(reducer, {
-      loading: true,
-      error: "",
-    });
+  const [
+    {
+      loading,
+      error,
+      products,
+      pages,
+      loadingCreate,
+      loadingDelete,
+      successDelete,
+    },
+    dispatch,
+  ] = useReducer(reducer, {
+    loading: true,
+    error: "",
+  });
   const { search } = useLocation();
   //search是useLocation下的變數代表整串query string 從?開始的值
   const sp = new URLSearchParams(search);
   const page = sp.get("page") || 1;
+  //取得資料列表
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -65,8 +84,12 @@ function AdminProducts() {
         dispatch({ type: "FETCH_FAIL", payload: "取得商品列表失敗" });
       }
     };
-    fetchData();
-  }, [page, userInfo]);
+    if (successDelete) {
+      dispatch({ type: "DELETE_RESET" }); //成功刪除重置successDelete狀態  重新觸發這個useEffect
+    } else {
+      fetchData();
+    }
+  }, [page, userInfo, successDelete]);
 
   const createHandler = async () => {
     if (window.confirm("確定要新增商品?")) {
@@ -83,6 +106,26 @@ function AdminProducts() {
       } catch (err) {
         toast.error("新增失敗");
         dispatch({ type: "CREATE_FAIL" });
+      }
+    }
+  };
+  //刪除商品
+  const deleteHandler = async (product) => {
+    if (window.confirm("確定要刪除")) {
+      try {
+        dispatch({ type: "DELETE_REQUEST" });
+        await axios.delete(
+          `http://localhost:5000/api/products/${product._id}`,
+          {
+            headers: { authorization: `Bearer ${userInfo.token}` },
+          }
+        );
+        toast.success("刪除成功");
+        dispatch({ type: "DELETE_SUCCESS" });
+      } catch (err) {
+        console.log(product._id);
+        toast.error("刪除失敗");
+        dispatch({ type: "DELETE_FAIL" });
       }
     }
   };
@@ -103,6 +146,8 @@ function AdminProducts() {
         </Col>
       </Row>
       {loadingCreate && <LoadingBox></LoadingBox>}
+      {loadingDelete && <LoadingBox></LoadingBox>}
+      {/* loading中以下就不會出現 */}
       {loading ? (
         <LoadingBox />
       ) : error ? (
@@ -130,10 +175,23 @@ function AdminProducts() {
                   <td>{product.brand}</td>
                   <td>
                     <Button
+                      className="mx-1"
                       type="button"
                       variant="light"
-                      onClick={() => navigate(`/admin/adminproducts/${product._id}`)}
-                    >編輯</Button>
+                      onClick={() =>
+                        navigate(`/admin/adminproducts/${product._id}`)
+                      }
+                    >
+                      編輯
+                    </Button>
+                    <Button
+                      className="mx-1"
+                      type="button"
+                      variant="light"
+                      onClick={() => deleteHandler(product)}
+                    >
+                      刪除
+                    </Button>
                   </td>
                 </tr>
               ))}
