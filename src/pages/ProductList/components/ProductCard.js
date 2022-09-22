@@ -27,11 +27,19 @@ function ProductCard(props) {
     });
   };
   return (
-    <div>
+    <div className="h-100 d-flex flex-column">
       <Link to={`/productList/${ProductData.slug}`}>
-        <img className="w-100 pb-3" src={`/imgs/${ProductData.image}`} alt="" />
+        <img
+          className="w-100 pb-3"
+          src={
+            ProductData.image.length > 20
+              ? ProductData.image
+              : `/imgs/${ProductData.image}`
+          }
+          alt=""
+        />
       </Link>
-      <h6>{ProductData.name}</h6>
+      <h6 className="flex-grow-1">{ProductData.name}</h6>
       <Rating
         rating={ProductData.rating}
         numReviews={ProductData.numReviews}

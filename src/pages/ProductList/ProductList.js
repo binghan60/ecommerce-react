@@ -268,7 +268,7 @@ function SearchPage() {
 
               <Row>
                 {products.map((product) => (
-                  <Col sm={6} lg={4} className="mb-3" key={product._id}>
+                  <Col xs={6} sm={4} lg={3} className="mb-3" key={product._id}>
                     <ProductCard ProductData={product}></ProductCard>
                   </Col>
                 ))}
