@@ -24,6 +24,8 @@ import AdminRoute from "./components/AdminRoute";
 import AdminProducts from "./pages/Admin/AdminProducts";
 import ProductEdit from "./pages/Admin/ProductEdit";
 import AdminOrders from "./pages/Admin/AdminOrders";
+import AdminUsers from "./pages/Admin/AdminUsers";
+import UserEdit from "./pages/Admin/UserEdit";
 function App() {
   return (
     <>
@@ -107,10 +109,18 @@ function App() {
                   }
                 />
                 <Route
-                  path="/admin/usermanagement"
+                  path="/admin/adminusers"
                   element={
                     <AdminRoute>
-                      <Dashboard />
+                      <AdminUsers />
+                    </AdminRoute>
+                  }
+                />
+                <Route
+                  path="/admin/adminusers/:id"
+                  element={
+                    <AdminRoute>
+                      <UserEdit />
                     </AdminRoute>
                   }
                 />
