@@ -4,7 +4,7 @@ export const Store = createContext();
 
 const initialState = {
   cart: {
-    //初始狀態是localStorage沒東西就是空陣列
+    //初始狀態有localStorage就是localStorage    沒東西就是空陣列
     //localStorage必須是字串 否則會變[object Object]
     cartItems: localStorage.getItem("cartItems")
       ? JSON.parse(localStorage.getItem("cartItems"))
@@ -73,6 +73,9 @@ function reducer(state, action) {
         ...state,
         cart: { ...state.cart, paymentMethod: action.payload },
       };
+    }
+    case "REMOVE_ADMIN": {
+      return { ...state, userInfo: { ...state.userInfo, isAdmin: action.payload } };
     }
     default:
       return state;

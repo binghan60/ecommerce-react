@@ -153,7 +153,7 @@ function AdminProducts() {
         "發生錯誤"
       ) : (
         <>
-          <table className="table table-dark">
+          <table className="table table-dark text-center">
             <thead>
               <tr>
                 <th>商品ID</th>

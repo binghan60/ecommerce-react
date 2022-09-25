@@ -57,7 +57,7 @@ function Dashboard() {
         <div className="dashboard">
           <Row>
             <Col md={4}>
-              <Card>
+              <Card >
                 <Card.Body>
                   <Card.Title>
                     本站註冊帳號數量為
@@ -70,7 +70,7 @@ function Dashboard() {
               </Card>
             </Col>
             <Col md={4}>
-              <Card>
+              <Card className="text-center">
                 <Card.Body>
                   <Card.Title>
                     總銷售金額為
@@ -83,7 +83,7 @@ function Dashboard() {
               </Card>
             </Col>
             <Col md={4}>
-              <Card>
+              <Card className="text-center">
                 <Card.Body>
                   <Card.Title>
                     已結帳

@@ -58,7 +58,7 @@ function OrderHistory() {
       ) : error ? (
         <p>發生錯誤</p>
       ) : (
-        <table className="table table-dark">
+        <table className="table table-dark text-center">
           <thead>
             <tr>
               <th>訂單編號</th>
