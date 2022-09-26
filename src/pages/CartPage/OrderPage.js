@@ -63,6 +63,7 @@ function OrderPage() {
     successPay: false,
     loadingPay: false,
   });
+  //點擊PaypalButton時
   function createOrder(data, actions) {
     return (
       actions.order

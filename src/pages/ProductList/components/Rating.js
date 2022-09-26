@@ -3,6 +3,7 @@ function Rating(props) {
   return (
     <div className="d-flex justify-content-between">
       <div className="rating">
+      {/* rating符合整數就1顆星 否則往下修 */}
         <span>
           <i
             className={

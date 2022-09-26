@@ -275,6 +275,7 @@ function SearchPage() {
               </Row>
 
               <div className="text-center my-3">
+                {/*用後端算出的總頁數無條件進位Ex:Array(5) 創造[empty,,empty,empty,empty,empty]陣列 用keys取索引0,1,2,3,4 跑map(x)=>{x+1} */}
                 {[...Array(pages).keys()].map((x) => (
                   <LinkContainer
                     key={x + 1}
