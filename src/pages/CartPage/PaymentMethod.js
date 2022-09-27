@@ -2,7 +2,7 @@ import { useState, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Store } from "../../Store";
 import CheckoutSteps from "./components/CheckoutSteps";
-import { Container, Form, Button } from "react-bootstrap";
+import { Container, Form, Button, Col, Row } from "react-bootstrap";
 import { Helmet } from "react-helmet-async";
 
 function PaymentMethod() {
@@ -31,31 +31,40 @@ function PaymentMethod() {
   return (
     <div>
       <CheckoutSteps step1 step2 step3></CheckoutSteps>
+      <h3 className="my-3">付款方式</h3>
       <Container className="w-50">
         <Helmet>付款方式</Helmet>
-        <h3>付款方式</h3>
         <Form onSubmit={submitHandler}>
-          <div>
-            <Form.Check
-              type="radio"
-              id="Paypal"
-              label="Paypal"
-              value="Paypal"
-              checked={paymentMethodName === "Paypal"}
-              onChange={(e) => setPaymentMethodName(e.target.value)}
-            ></Form.Check>
-          </div>
-          <div>
-            <Form.Check
-              type="radio"
-              id="Stripe"
-              label="Stripe"
-              value="Stripe"
-              checked={paymentMethodName === "Stripe"}
-              onChange={(e) => setPaymentMethodName(e.target.value)}
-            ></Form.Check>
-          </div>
-          <div>
+          <Row>
+            <Col md={6}>
+              <img className="w-100" src="/imgs/paypal.png" alt=""></img>
+              <Form.Check
+                type="radio"
+                id="Paypal"
+                label="Paypal"
+                value="Paypal"
+                checked={paymentMethodName === "Paypal"}
+                onChange={(e) => setPaymentMethodName(e.target.value)}
+              ></Form.Check>
+            </Col>
+            <Col md={6}>
+              <img
+                className="w-100"
+                src="/imgs/linepay-logo-tw.png"
+                alt=""
+              ></img>
+              <Form.Check
+                type="radio"
+                id="LinePay"
+                label="LinePay"
+                value="LinePay"
+                checked={paymentMethodName === "LinePay"}
+                onChange={(e) => setPaymentMethodName(e.target.value)}
+              ></Form.Check>
+            </Col>
+          </Row>
+
+          <div className="text-center">
             <Button type="submit">下一步</Button>
           </div>
         </Form>
