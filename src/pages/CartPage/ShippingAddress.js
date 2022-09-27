@@ -65,11 +65,11 @@ function ShippingAddress() {
   return (
     <>
       <CheckoutSteps step1 step2 />
+      <h3 className="my-3">訂購資訊</h3>
       <Container className="w-50">
         <Helmet>
           <title>訂購資訊</title>
         </Helmet>
-        <h3 className="my-3">訂購資訊</h3>
         <Form onSubmit={submitHandler}>
           <Form.Group className="mb-3">
             <Form.Label>

@@ -46,9 +46,9 @@ function Dashboard() {
   return (
     <>
       <Helmet>
-        <title className="text-center">管理面板</title>
+        <title>管理面板</title>
       </Helmet>
-      <h3>歡迎{userInfo.name}主管</h3>
+      <h3 className="my-3">歡迎{userInfo.name}主管</h3>
       {loading ? (
         <LoadingBox />
       ) : error ? (
@@ -57,7 +57,7 @@ function Dashboard() {
         <div className="dashboard">
           <Row>
             <Col md={4}>
-              <Card >
+              <Card className="text-center">
                 <Card.Body>
                   <Card.Title>
                     本站註冊帳號數量為
@@ -120,7 +120,7 @@ function Dashboard() {
             ) : (
               <Chart
                 width="100%"
-                height="300px"
+                height="250px"
                 chartType="PieChart" //圓餅圖
                 loader={<div>圖表載入中,請稍候...</div>}
                 data={[

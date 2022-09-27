@@ -43,7 +43,7 @@ function ProductPage() {
       payload: { ...ProductPageData, quantity },
     });
   };
-//產品內頁
+  //產品內頁
   return (
     <>
       <Row>
@@ -107,7 +107,7 @@ function ProductPage() {
       </Row>
       <div className="text-center">
         <Link to={"/ProductList"}>
-          <button className="btn btn-light">回商品列表</button>
+          <button className="btn btn-light my-5">回商品列表</button>
         </Link>
       </div>
     </>

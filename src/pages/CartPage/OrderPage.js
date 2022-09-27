@@ -189,14 +189,14 @@ function OrderPage() {
           <Helmet>
             <title className="text-center">訂單編號：{orderId}</title>
           </Helmet>
-          <h3>訂單編號：{orderId}</h3>
+          <h3 className="my-3">訂單編號：{orderId}</h3>
           <div className="text-black">
             <Row>
               <Col md={8}>
                 <Card className="mb-3">
                   <Card.Body>
                     <Card.Title>訂購資訊</Card.Title>
-                    <Card.Text>
+                    <Card.Text className="mt-3">
                       <strong>姓名：</strong>
                       {order.shippingAddress.fullName}
                       <br />
@@ -204,27 +204,32 @@ function OrderPage() {
                       {order.shippingAddress.country}
                       {order.shippingAddress.township}
                       {order.shippingAddress.address}
+                      <br />
+                      <strong>配送狀態：</strong>
+                      {order.isDeliverd ? (
+                        <span variant="success">
+                          已於{order.deliveredAt}送達
+                        </span>
+                      ) : (
+                        <span variant="danger">尚未送達</span>
+                      )}
                     </Card.Text>
-                    <strong>配送狀態：</strong>
-                    {order.isDeliverd ? (
-                      <span variant="success">已於{order.deliveredAt}送達</span>
-                    ) : (
-                      <span variant="danger">尚未送達</span>
-                    )}
                   </Card.Body>
                 </Card>
                 <Card className="mb-3">
                   <Card.Body>
                     <Card.Title>付款資訊</Card.Title>
-                    <Card.Text>
+                    <Card.Text className="mt-3">
                       <strong>付款方式：</strong>
                       {order.paymentMethod}
+                      <br />
+                      <strong>付款狀態：</strong>
+                      {order.isPaid ? (
+                        <span>已於 {order.paidAt.substring(0, 10)} 付款</span>
+                      ) : (
+                        <span variant="danger">尚未付款</span>
+                      )}
                     </Card.Text>
-                    {order.isPaid ? (
-                      <p>已於{order.paidAt.substring(0, 10)}付款</p>
-                    ) : (
-                      <p variant="danger">尚未付款</p>
-                    )}
                   </Card.Body>
                 </Card>
                 <Card>
@@ -235,20 +240,24 @@ function OrderPage() {
                         return (
                           <ListGroup.Item key={item._id}>
                             <Row className="align-items-center">
-                              <Col md={6}>
+                              <Col md={2}>
                                 <img
-                                  className="w-50"
+                                  className="w-100"
                                   src={`/imgs/${item.image}`}
                                   alt={item.name}
                                 ></img>
+                              </Col>
+                              <Col md={4} className="text-center">
                                 <Link to={`/productlist/${item.slug}`}>
                                   {item.name}
                                 </Link>
                               </Col>
-                              <Col md={3}>
-                                <span>{item.quantity}</span>
+                              <Col md={3} className="text-center">
+                                <span>{item.quantity} 件</span>
                               </Col>
-                              <Col md={3}>${item.price}</Col>
+                              <Col md={3} className="text-center">
+                                {item.price} 元
+                              </Col>
                             </Row>
                           </ListGroup.Item>
                         );
@@ -265,23 +274,23 @@ function OrderPage() {
                       <ListGroup.Item>
                         <Row>
                           <Col>商品</Col>
-                          <Col>${order.itemsPrice}</Col>
+                          <Col>{order.itemsPrice} 元</Col>
                         </Row>
                       </ListGroup.Item>
                       <ListGroup.Item>
                         <Row>
                           <Col>運費</Col>
-                          <Col>${order.shippingPrice}</Col>
+                          <Col>{order.shippingPrice} 元</Col>
                         </Row>
                       </ListGroup.Item>
                       <ListGroup.Item>
                         <Row>
                           <Col>總計</Col>
-                          <Col>${order.totalPrice}</Col>
+                          <Col>{order.totalPrice} 元</Col>
                         </Row>
                       </ListGroup.Item>
-                      {/* 還沒付款才會出現 */}
-                      {!order.isPaid && (
+                      {/* 管理者 或 已付款 不顯示按鈕*/}
+                      {!userInfo.isAdmin && !order.isPaid && (
                         <ListGroup.Item>
                           {isPending ? (
                             <LoadingBox></LoadingBox>
@@ -300,7 +309,7 @@ function OrderPage() {
                           {loadingPay && <LoadingBox></LoadingBox>}
                         </ListGroup.Item>
                       )}
-                      {/* 管理者  已付款  尚未送達 */}
+                      {/* 管理者 或 已付款且尚未送達  才可點擊 */}
                       {userInfo.isAdmin && order.isPaid && !order.isDelivered && (
                         <ListGroup.Item>
                           {loadingDeliver && <LoadingBox></LoadingBox>}
@@ -309,7 +318,7 @@ function OrderPage() {
                               type="button"
                               onClick={deliverFinishHandler}
                             >
-                              完成配送
+                              模擬送達
                             </Button>
                           </div>
                         </ListGroup.Item>

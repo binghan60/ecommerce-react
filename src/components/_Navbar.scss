@@ -4,6 +4,17 @@ nav {
   font-weight: bold;
   a {
     text-decoration: none;
-    color: aliceblue;
+    color: #000 !important;
+    background-color: #ffc107 !important;
+    z-index: 999 !important;
+    position: relative !important;
+    transition: all 0.25s ease-out !important;
+  }
+  a:hover {
+    transform: translateY(-2px);
+    font-weight: 700;
+  }
+  .dropdown-menu {
+    background-color: #ffc107 !important;
   }
 }

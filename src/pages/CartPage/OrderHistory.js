@@ -52,7 +52,7 @@ function OrderHistory() {
       <Helmet>
         <title>歷史訂單</title>
       </Helmet>
-      <h3>歷史訂單</h3>
+      <h3 className="my-3">歷史訂單</h3>
       {loading ? (
         <LoadingBox></LoadingBox>
       ) : error ? (

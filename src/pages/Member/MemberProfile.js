@@ -65,7 +65,7 @@ function MemberProfile() {
         <title className="text-center">會員資料</title>
       </Helmet>
       <div className="container w-50">
-        <h3>會員資料</h3>
+        <h3 className="my-3">會員資料</h3>
 
         <form onSubmit={submitHandler}>
           <Form.Group className="mb-3" controlId="name">

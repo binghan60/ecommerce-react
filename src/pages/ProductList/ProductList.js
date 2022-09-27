@@ -140,7 +140,7 @@ function SearchPage() {
           <div className="mb-4">
             <SearchBox />
           </div>
-          <h3>種類</h3>
+          <h3 className="my-3">種類</h3>
           <div>
             <ul>
               <li>
@@ -165,7 +165,7 @@ function SearchPage() {
             </ul>
           </div>
           <div>
-            <h3>價格</h3>
+            <h3 className="my-3">價格</h3>
             <ul>
               <li>
                 <Link
@@ -188,7 +188,7 @@ function SearchPage() {
             </ul>
           </div>
           <div>
-            <h3>評價</h3>
+            <h3 className="my-3">評價</h3>
             <ul>
               <li>
                 <Link

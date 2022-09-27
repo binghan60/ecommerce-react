@@ -95,7 +95,7 @@ function UserEdit() {
         <Helmet>
           <title>修改會員{userId}資料</title>
         </Helmet>
-        <h3>會員編號{userId}</h3>
+        <h3 className="my-3">會員編號{userId}</h3>
         {loading ? (
           <LoadingBox></LoadingBox>
         ) : error ? (

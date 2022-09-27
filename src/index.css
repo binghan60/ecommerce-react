@@ -25,6 +25,18 @@ header a {
   color: #fff;
 }
 
+.text36 {
+  font-size: 2rem;
+}
+
+@media (max-width: 768px) {
+  table {
+    width: 100%;
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+}
 nav {
   height: 3.5rem;
   font-size: 1.25rem;
@@ -32,7 +44,18 @@ nav {
 }
 nav a {
   text-decoration: none;
-  color: aliceblue;
+  color: #000 !important;
+  background-color: #ffc107 !important;
+  z-index: 999 !important;
+  position: relative !important;
+  transition: all 0.25s ease-out !important;
+}
+nav a:hover {
+  transform: translateY(-2px);
+  font-weight: 700;
+}
+nav .dropdown-menu {
+  background-color: #ffc107 !important;
 }
 
 .rating span {
@@ -40,14 +63,15 @@ nav a {
 }
 
 .checkout-steps > div {
-  border-bottom: 0.2rem solid #fff;
+  border-bottom: 0.4rem solid #fff;
   color: #fff;
   font-size: 1.25rem;
 }
 
 .checkout-steps > div.active {
-  border-bottom: 0.2rem solid #f08000;
-  color: #f08000;
+  padding-bottom: 0.5em;
+  border-bottom: 0.4rem solid #FFAF60;
+  color: #FFAF60;
 }
 
 .text-bold {

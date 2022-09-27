@@ -24,8 +24,21 @@ header {
   }
 }
 
+.text36 {
+  font-size: 2rem;
+}
+
+@media (max-width: 768px) {
+  table {
+    width: 100%;
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+}
+
 @import "./components/Navbar";
 @import "./pages/ProductList/components/Rating";
 @import "./pages/CartPage/components/CheckoutSteps";
 @import "./pages/ProductList/ProductList";
-@import "./pages/Admin/Dashborad"
+@import "./pages/Admin/Dashborad";

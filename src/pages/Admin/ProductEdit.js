@@ -136,7 +136,7 @@ function ProductEdit() {
       <Helmet>
         <title>編輯{productId}資訊</title>
       </Helmet>
-      <h3>商品編號{productId}</h3>
+      <h3 className="my-3">商品編號{productId}</h3>
       {loading ? (
         <LoadingBox></LoadingBox>
       ) : error ? (

@@ -1,9 +1,10 @@
 .checkout-steps > div {
-  border-bottom: 0.2rem solid #fff;
+  border-bottom: 0.4rem solid #fff;
   color: #fff;
   font-size: 1.25rem;
 }
 .checkout-steps > div.active {
-  border-bottom: 0.2rem solid #f08000;
-  color: #f08000;
+  padding-bottom: 0.5em;
+  border-bottom: 0.4rem solid #FFAF60;
+  color: #FFAF60;
 }

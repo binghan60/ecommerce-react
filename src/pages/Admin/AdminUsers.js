@@ -70,14 +70,14 @@ function AdminUsers() {
         toast.success("刪除成功");
       } catch (err) {
         dispatch({ type: "DELETE_FAIL" });
-        toast.error(err.response.data.message);//後端回傳的message
+        toast.error(err.response.data.message); //後端回傳的message
       }
     }
   };
   return (
     <>
       <Helmet>用戶管理</Helmet>
-      <h3>用戶管理</h3>
+      <h3 className="my-3">用戶管理</h3>
       {loadingDelete && <LoadingBox></LoadingBox>}
       {loading ? (
         <LoadingBox></LoadingBox>
@@ -87,7 +87,7 @@ function AdminUsers() {
         <table className="table table-dark text-center">
           <thead>
             <tr>
-              <td>ID</td>
+              <td>用戶編號</td>
               <td>名稱</td>
               <td>電子信箱</td>
               <td>管理者</td>
@@ -107,7 +107,7 @@ function AdminUsers() {
                   <Button
                     className="mx-1"
                     type="button"
-                    variant="light"
+                    variant="success"
                     onClick={() => navigate(`/admin/adminusers/${user._id}`)}
                   >
                     修改
@@ -115,8 +115,9 @@ function AdminUsers() {
                   <Button
                     className="mx-1"
                     type="button"
-                    variant="light"
+                    variant="danger"
                     onClick={() => deleteHandler(user)}
+                    disabled={userInfo._id === user._id}//不可刪除自己
                   >
                     刪除
                   </Button>

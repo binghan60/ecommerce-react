@@ -13,7 +13,7 @@ function NavbarComponent() {
 
   return (
     <>
-      <Navbar expand="lg" bg="warning" variant="light">
+      <Navbar expand="lg" bg="warning" variant="dark">
         <Container>
           <LinkContainer to="/">
             <Navbar.Brand>MeowMeat</Navbar.Brand>
@@ -39,13 +39,11 @@ function NavbarComponent() {
               {userInfo && userInfo.isAdmin && (
                 <NavDropdown
                   id="basic-nav-dropdown"
-                  menuVariant="dark"
                   title="管理功能"
                 >
                   <LinkContainer to="/admin/dashboard">
                     <NavDropdown.Item>管理面板</NavDropdown.Item>
                   </LinkContainer>
-
                   <LinkContainer to="/admin/adminproducts">
                     <NavDropdown.Item>商品管理</NavDropdown.Item>
                   </LinkContainer>
@@ -60,7 +58,6 @@ function NavbarComponent() {
               {userInfo ? (
                 <NavDropdown
                   id="basic-nav-dropdown"
-                  menuVariant="dark"
                   title={userInfo.name}
                 >
                   <LinkContainer to="/memberprofile">

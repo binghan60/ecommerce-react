@@ -75,7 +75,7 @@ function AdminOrders() {
   return (
     <>
       <Helmet>訂單管理</Helmet>
-      <h3>訂單管理</h3>
+      <h3 className="my-3">訂單管理</h3>
       {loadingDelete && <LoadingBox></LoadingBox>}
       {loading ? (
         <LoadingBox></LoadingBox>
@@ -85,7 +85,7 @@ function AdminOrders() {
         <table className="table table-dark text-center">
           <thead>
             <tr>
-              <th>ID</th>
+              <th>訂單編號</th>
               <th>用戶</th>
               <th>日期</th>
               <th>金額</th>
@@ -113,7 +113,7 @@ function AdminOrders() {
                   <Button
                     className="mx-1"
                     type="button"
-                    variant="light"
+                    variant="success"
                     onClick={() => {
                       navigate(`/orderpage/${order._id}`);
                     }}
@@ -124,7 +124,7 @@ function AdminOrders() {
                     onClick={() => deleteHandler(order)}
                     className="mx-1"
                     type="button"
-                    variant="light"
+                    variant="danger"
                   >
                     刪除
                   </Button>
