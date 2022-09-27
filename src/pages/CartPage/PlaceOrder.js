@@ -36,7 +36,7 @@ function PlaceOrder() {
     0
   );
   //運費
-  cart.shippingPrice = cart.itemsPrice >= 500 ? 0 : 60;
+  cart.shippingPrice = cart.itemsPrice >= 1000 ? 0 : 60;
   cart.totalPrice = cart.itemsPrice + cart.shippingPrice;
   const placeOrderHandler = async () => {
     try {
@@ -73,33 +73,44 @@ function PlaceOrder() {
   return (
     <>
       <CheckoutSteps step1 step2 step3 step4></CheckoutSteps>
+      <h3 className="my-3">訂單資訊確認</h3>
       <Container className="text-black">
         <Helmet>訂單資訊確認</Helmet>
-        <h3>訂單資訊確認</h3>
         <Row>
           <Col md={8}>
             <Card className="mb-3">
               <Card.Body>
                 <Card.Title>基本資料</Card.Title>
-                <Card.Text>
+                <Card.Text className="mt-3">
                   <strong>姓名：</strong>
                   {cart.shippingAddress.fullName}
                   <br />
-                  <strong>地址：</strong>{cart.shippingAddress.country}
+                  <strong>地址：</strong>
+                  {cart.shippingAddress.country}
                   {cart.shippingAddress.township}
                   {cart.shippingAddress.address}
                 </Card.Text>
-                <Link to={"/shippingaddress"}>編輯</Link>
+                <Link
+                  style={{ fontSize: "1.15rem", fontWeight: "600" }}
+                  to={"/shippingaddress"}
+                >
+                  編輯
+                </Link>
               </Card.Body>
             </Card>
             <Card className="mb-3">
               <Card.Body>
                 <Card.Title>付款方式</Card.Title>
-                <Card.Text>
+                <Card.Text className="mt-3">
                   <strong>付款方式：</strong>
                   {cart.paymentMethod}
                 </Card.Text>
-                <Link to={"/paymentmethod"}>編輯</Link>
+                <Link
+                  style={{ fontSize: "1.15rem", fontWeight: "600" }}
+                  to={"/paymentmethod"}
+                >
+                  編輯
+                </Link>
               </Card.Body>
             </Card>
             <Card className="mb-3">
@@ -109,29 +120,45 @@ function PlaceOrder() {
                   {cart.cartItems.map((item) => (
                     <ListGroup.Item key={item._id}>
                       <Row className="align-items-center">
-                        <Col md={6}>
+                        <Col md={2}>
                           <img
-                            className="w-50 rounded"
+                            className="w-100 rounded"
                             src={`/imgs/${item.image}`}
                             alt={item.name}
                           />
+                        </Col>
+                        <Col md={4} className="text-center">
                           <Link to={`/productlist/${item.slug}`}>
                             {item.name}
                           </Link>
                         </Col>
-                        <Col md={3}>
-                          <span>{item.quantity}</span>
+                        <Col md={3} className="text-center">
+                          <span>{item.quantity} 件</span>
                         </Col>
-                        <Col md={3}>{item.price}</Col>
+                        <Col md={3} className="text-center">
+                          共 {item.price} 元
+                        </Col>
                       </Row>
                     </ListGroup.Item>
                   ))}
                 </ListGroup>
-                <Link to={"/cartpage"}>編輯</Link>
+                <div className="mt-2">
+                  <Link
+                    style={{ fontSize: "1.15rem", fontWeight: "600" }}
+                    to={"/cartpage"}
+                  >
+                    編輯
+                  </Link>
+                </div>
               </Card.Body>
             </Card>
           </Col>
           <Col md={4}>
+            <img
+              className="w-100"
+              src="/imgs/1000_free_shipping.png"
+              alt=""
+            ></img>
             <Card>
               <Card.Body>
                 <Card.Title>訂單總計</Card.Title>
