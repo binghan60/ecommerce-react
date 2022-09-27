@@ -136,7 +136,7 @@ function AdminProducts() {
       </Helmet>
       <Row>
         <Col>
-          <h3>商品管理</h3>
+          <h3 className="my-3">商品管理</h3>
         </Col>
         <Col className="col text-end">
           <Button type="button" onClick={createHandler}>
@@ -156,7 +156,7 @@ function AdminProducts() {
           <table className="table table-dark text-center">
             <thead>
               <tr>
-                <th>商品ID</th>
+                <th>商品編號</th>
                 <th>名稱</th>
                 <th>價格</th>
                 <th>種類</th>
@@ -176,7 +176,7 @@ function AdminProducts() {
                     <Button
                       className="mx-1"
                       type="button"
-                      variant="light"
+                      variant="success"
                       onClick={() =>
                         navigate(`/admin/adminproducts/${product._id}`)
                       }
@@ -186,7 +186,7 @@ function AdminProducts() {
                     <Button
                       className="mx-1"
                       type="button"
-                      variant="light"
+                      variant="danger"
                       onClick={() => deleteHandler(product)}
                     >
                       刪除
@@ -196,7 +196,7 @@ function AdminProducts() {
               ))}
             </tbody>
           </table>
-          <div className="text-center">
+          {/* <div className="text-center">
             {[...Array(pages).keys()].map((x) => (
               <LinkContainer
                 className="mx-2"
@@ -211,7 +211,7 @@ function AdminProducts() {
                 </Button>
               </LinkContainer>
             ))}
-          </div>
+          </div> */}
         </>
       )}
     </>
@@ -219,13 +219,3 @@ function AdminProducts() {
 }
 
 export default AdminProducts;
-{
-  /* <Link
-                className={x + 1 === Number(page) ? "btn text-bold" : "btn"} 
-                key={x + 1}
-                to={`/admin/adminproducts?page=${x + 1}`}
-                
-              >
-                {x + 1}
-              </Link> */
-}
