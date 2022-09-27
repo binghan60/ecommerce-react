@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { Store } from "../../Store";
 import { Helmet } from "react-helmet-async";
 import { Button, Card, ListGroup, Row, Col } from "react-bootstrap";
+import CheckoutSteps from "./components/CheckoutSteps";
 
 function CartPage() {
   const navigate = useNavigate();
@@ -11,7 +12,6 @@ function CartPage() {
     cart: { cartItems },
   } = state;
   const updateCartHandler = (item, quantity) => {
-
     ctxDispatch({
       type: "CART_ADD_ITEM",
       payload: { ...item, quantity },
@@ -28,19 +28,22 @@ function CartPage() {
   };
   return (
     <>
-      <Helmet>
-        <title className="text-center">購物車</title>
-      </Helmet>
-      <h3>燒肉屋 | 購物車</h3>
-      <Row>
-        {cartItems.length === 0 ? (
-          <Col md={12}>
-            <Link to={"/productList"}>
-              <h5 className="text-center">尚未選購商品，點擊前往購物</h5>
-            </Link>
-          </Col>
-        ) : (
+      {cartItems.length === 0 ? (
+        <Col md={12}>
+          <Link to={"/productList"}>
+            <div className="mt-5">
+              <h5 className="text-center text36">尚未選購商品，點擊前往購物</h5>
+            </div>
+          </Link>
+        </Col>
+      ) : (
+        <Row>
           <>
+            <CheckoutSteps step1></CheckoutSteps>
+            <Helmet>
+              <title className="text-center">購物車</title>
+            </Helmet>
+            <h3 className="my-3">燒肉屋 | 購物車</h3>
             <Col md={8}>
               <ListGroup>
                 {cartItems.map((item) => {
@@ -130,8 +133,8 @@ function CartPage() {
               </Card>
             </Col>
           </>
-        )}
-      </Row>
+        </Row>
+      )}
     </>
   );
 }
