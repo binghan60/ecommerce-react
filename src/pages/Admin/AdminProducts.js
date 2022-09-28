@@ -140,86 +140,67 @@ function AdminProducts() {
         "發生錯誤"
       ) : (
         <>
-          <>
-            <Helmet>
-              <title className="text-center">商品管理</title>
-            </Helmet>
-            <Row>
-              <Col>
-                <h3 className="my-3">商品管理</h3>
-              </Col>
-              <Col className="col text-end">
-                <Button type="button" onClick={createHandler}>
-                  <i className="fa-solid fa-plus"></i> 新商品
-                </Button>
-              </Col>{" "}
-              <table className="table table-dark text-center">
-                <thead>
-                  <tr>
-                    <th>商品編號</th>
-                    <th>名稱</th>
-                    <th>價格</th>
-                    <th>種類</th>
-                    <th>品牌</th>
-                    <th>功能</th>
+          <Helmet>
+            <title className="text-center">商品管理</title>
+          </Helmet>
+          <Row>
+            <Col>
+              <h3 className="my-3">商品管理</h3>
+            </Col>
+            <Col className="col text-end">
+              <Button type="button" onClick={createHandler}>
+                <i className="fa-solid fa-plus"></i> 新商品
+              </Button>
+            </Col>
+            <table className="table table-dark text-center">
+              <thead>
+                <tr>
+                  <th>商品編號</th>
+                  <th>名稱</th>
+                  <th>價格</th>
+                  <th>種類</th>
+                  <th>品牌</th>
+                  <th>功能</th>
+                </tr>
+              </thead>
+              <tbody>
+                {products.map((product) => (
+                  <tr key={product._id}>
+                    <td>
+                      <Link to={`/productlist/${product.slug}`}>
+                        {product._id}
+                      </Link>
+                    </td>
+                    <td>{product.name}</td>
+                    <td>{product.price}</td>
+                    <td>{product.category}</td>
+                    <td>{product.brand}</td>
+
+                    <td>
+                      <Button
+                        className="mx-1"
+                        type="button"
+                        variant="success"
+                        onClick={() =>
+                          navigate(`/admin/adminproducts/${product._id}`)
+                        }
+                      >
+                        編輯
+                      </Button>
+                      <Button
+                        className="mx-1"
+                        type="button"
+                        variant="danger"
+                        onClick={() => deleteHandler(product)}
+                      >
+                        刪除
+                      </Button>
+                    </td>
                   </tr>
-                </thead>
-                <tbody>
-                  {products.map((product) => (
-                    <tr key={product._id}>
-                      <td>
-                        <Link to={`/productlist/${product.slug}`}>
-                          {product._id}
-                        </Link>
-                      </td>
-                      <td>{product.name}</td>
-                      <td>{product.price}</td>
-                      <td>{product.category}</td>
-                      <td>{product.brand}</td>
-
-                      <td>
-                        <Button
-                          className="mx-1"
-                          type="button"
-                          variant="success"
-                          onClick={() =>
-                            navigate(`/admin/adminproducts/${product._id}`)
-                          }
-                        >
-                          編輯
-                        </Button>
-                        <Button
-                          className="mx-1"
-                          type="button"
-                          variant="danger"
-                          onClick={() => deleteHandler(product)}
-                        >
-                          刪除
-                        </Button>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </Row>
-          </>
-
-          {/* <div className="text-center">
-            {[...Array(pages).keys()].map((x) => (
-              <LinkContainer
-                className="mx-2"
-                key={x + 1}
-                to={`/admin/adminproducts?page=${x + 1}`} //x從0開始 因此x+1
-              >
-                <Button
-                  className={Number(page) === x + 1 ? "text-bold" : ""}
-                  variant="light"
-                >
-                  {x + 1}
-                </Button>
-              </LinkContainer>
-            ))}
-          </div> */}
+                ))}
+              </tbody>
+            </table>
+          </Row>
         </>
       )}
     </>
