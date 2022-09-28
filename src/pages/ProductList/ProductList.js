@@ -146,7 +146,7 @@ function SearchPage() {
               <li>
                 <Link
                   className={"all" === category ? "text-bold" : ""}
-                  to={getFilterUrl({ category: "all" })}
+                  to={getFilterUrl({ category: "all" })}//解構形式參數的category
                 >
                   顯示全部
                 </Link>

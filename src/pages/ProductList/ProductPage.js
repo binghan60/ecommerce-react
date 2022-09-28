@@ -24,7 +24,7 @@ function ProductPage() {
   if (ProductPageData.message === "找不到該產品") {
     navigate("/", { replace: true });
   }
-  //state購物車狀態
+  //state購物車狀態 每改變數量都發req給後端確認庫存
   const { state, dispatch: ctxDispatch } = useContext(Store);
   const { cart } = state;
   const addToCartHandler = async () => {
@@ -44,13 +44,18 @@ function ProductPage() {
     });
   };
   //產品內頁
+  console.log(ProductPageData.image);
   return (
     <>
       <Row>
         <Col sm={12} md={6} lg={6}>
           <img
             className="w-100"
-            src={`/imgs/${ProductPageData.image}`}
+            src={
+              ProductPageData.image && ProductPageData.image.length > 20
+                ? ProductPageData.image
+                : `/imgs/${ProductPageData.image}`
+            }
             alt={ProductPageData.name}
           />
         </Col>

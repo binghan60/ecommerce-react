@@ -45,16 +45,16 @@ function Dashboard() {
 
   return (
     <>
-      <Helmet>
-        <title>管理面板</title>
-      </Helmet>
-      <h3 className="my-3">歡迎{userInfo.name}主管</h3>
       {loading ? (
         <LoadingBox />
       ) : error ? (
         error
       ) : (
         <div className="dashboard">
+          <Helmet>
+            <title>管理面板</title>
+          </Helmet>
+          <h3 className="my-3">歡迎{userInfo.name}主管</h3>
           <Row>
             <Col md={4}>
               <Card className="text-center">

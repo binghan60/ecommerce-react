@@ -133,99 +133,101 @@ function ProductEdit() {
   };
   return (
     <Container className="w-50">
-      <Helmet>
-        <title>編輯{productId}資訊</title>
-      </Helmet>
-      <h3 className="my-3">商品編號{productId}</h3>
       {loading ? (
         <LoadingBox></LoadingBox>
       ) : error ? (
         "發生錯誤"
       ) : (
-        <Form onSubmit={submitHandler}>
-          <Form.Group className="mb-2" controlId="name">
-            <Form.Label>商品名稱</Form.Label>
-            <Form.Control
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              required
-            />
-          </Form.Group>
-          <Form.Group className="mb-2" controlId="slug">
-            <Form.Label>商品別名</Form.Label>
-            <Form.Control
-              value={slug}
-              onChange={(e) => setSlug(e.target.value)}
-              required
-            />
-          </Form.Group>
-          <Form.Group className="mb-2" controlId="price">
-            <Form.Label>價格</Form.Label>
-            <Form.Control
-              value={price}
-              onChange={(e) => setPrice(e.target.value)}
-              required
-            />
-          </Form.Group>
-          <Form.Group className="mb-2" controlId="image">
-            <Form.Label>圖片檔名</Form.Label>
-            <Form.Control
-              value={image}
-              onChange={(e) => setImage(e.target.value)}
-              required
-            />
-            <div className="text-center">
-              <img
-                className="w-50"
-                src={image.length > 20 ? image : `/imgs/${image}`}
-                alt=""
-              ></img>
+        <>
+          <Helmet>
+            <title>編輯{productId}資訊</title>
+          </Helmet>
+          <h3 className="my-3">商品編號{productId}</h3>{" "}
+          <Form onSubmit={submitHandler}>
+            <Form.Group className="mb-2" controlId="name">
+              <Form.Label>商品名稱</Form.Label>
+              <Form.Control
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                required
+              />
+            </Form.Group>
+            <Form.Group className="mb-2" controlId="slug">
+              <Form.Label>商品別名</Form.Label>
+              <Form.Control
+                value={slug}
+                onChange={(e) => setSlug(e.target.value)}
+                required
+              />
+            </Form.Group>
+            <Form.Group className="mb-2" controlId="price">
+              <Form.Label>價格</Form.Label>
+              <Form.Control
+                value={price}
+                onChange={(e) => setPrice(e.target.value)}
+                required
+              />
+            </Form.Group>
+            <Form.Group className="mb-2" controlId="image">
+              <Form.Label>圖片檔名</Form.Label>
+              <Form.Control
+                value={image}
+                onChange={(e) => setImage(e.target.value)}
+                required
+              />
+              <div className="text-center">
+                <img
+                  className="w-50"
+                  src={image.length > 20 ? image : `/imgs/${image}`}
+                  alt=""
+                ></img>
+              </div>
+            </Form.Group>
+            <Form.Group className="mb-2" controlId="imageFile">
+              <Form.Label>圖片</Form.Label>
+              <Form.Control type="file" onChange={uploadFileHandler} />
+              {loadingUpload && <LoadingBox></LoadingBox>}
+            </Form.Group>
+            <Form.Group className="mb-2" controlId="category">
+              <Form.Label>種類</Form.Label>
+              <Form.Control
+                value={category}
+                onChange={(e) => setCategory(e.target.value)}
+                required
+              />
+            </Form.Group>
+            <Form.Group className="mb-2" controlId="countInStock">
+              <Form.Label>庫存</Form.Label>
+              <Form.Control
+                value={countInStock}
+                onChange={(e) => setCountInStock(e.target.value)}
+                required
+              />
+            </Form.Group>
+            <Form.Group className="mb-2" controlId="brand">
+              <Form.Label>品牌</Form.Label>
+              <Form.Control
+                value={brand}
+                onChange={(e) => setBrand(e.target.value)}
+                required
+              />
+            </Form.Group>
+            <Form.Group className="mb-2" controlId="description">
+              <Form.Label>描述</Form.Label>
+              <Form.Control
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+                required
+              />
+            </Form.Group>
+            <div className="my-4 text-center">
+              <Button disabled={loadingUpdate} type="submit">
+                送出修改
+              </Button>
+              {loadingUpdate && <LoadingBox></LoadingBox>}
             </div>
-          </Form.Group>
-          <Form.Group className="mb-2" controlId="imageFile">
-            <Form.Label>圖片</Form.Label>
-            <Form.Control type="file" onChange={uploadFileHandler} />
-            {loadingUpload && <LoadingBox></LoadingBox>}
-          </Form.Group>
-          <Form.Group className="mb-2" controlId="category">
-            <Form.Label>種類</Form.Label>
-            <Form.Control
-              value={category}
-              onChange={(e) => setCategory(e.target.value)}
-              required
-            />
-          </Form.Group>
-          <Form.Group className="mb-2" controlId="countInStock">
-            <Form.Label>庫存</Form.Label>
-            <Form.Control
-              value={countInStock}
-              onChange={(e) => setCountInStock(e.target.value)}
-              required
-            />
-          </Form.Group>
-          <Form.Group className="mb-2" controlId="brand">
-            <Form.Label>品牌</Form.Label>
-            <Form.Control
-              value={brand}
-              onChange={(e) => setBrand(e.target.value)}
-              required
-            />
-          </Form.Group>
-          <Form.Group className="mb-2" controlId="description">
-            <Form.Label>描述</Form.Label>
-            <Form.Control
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-              required
-            />
-          </Form.Group>
-          <div className="my-4 text-center">
-            <Button disabled={loadingUpdate} type="submit">
-              送出修改
-            </Button>
-            {loadingUpdate && <LoadingBox></LoadingBox>}
-          </div>
-        </Form>
+          </Form>
+        </>
       )}
     </Container>
   );

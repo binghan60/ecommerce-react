@@ -76,56 +76,58 @@ function AdminUsers() {
   };
   return (
     <>
-      <Helmet>用戶管理</Helmet>
-      <h3 className="my-3">用戶管理</h3>
       {loadingDelete && <LoadingBox></LoadingBox>}
       {loading ? (
         <LoadingBox></LoadingBox>
       ) : error ? (
         "發生錯誤"
       ) : (
-        <table className="table table-dark text-center">
-          <thead>
-            <tr>
-              <td>用戶編號</td>
-              <td>名稱</td>
-              <td>電子信箱</td>
-              <td>管理者</td>
-              <td>建立日期</td>
-              <td>功能</td>
-            </tr>
-          </thead>
-          <tbody>
-            {users.map((user) => (
-              <tr key={user._id}>
-                <td>{user._id}</td>
-                <td>{user.name}</td>
-                <td>{user.email}</td>
-                <td>{user.isAdmin ? "是" : "否"}</td>
-                <td>{user.createdAt.substring(0, 10)}</td>
-                <td>
-                  <Button
-                    className="mx-1"
-                    type="button"
-                    variant="success"
-                    onClick={() => navigate(`/admin/adminusers/${user._id}`)}
-                  >
-                    修改
-                  </Button>
-                  <Button
-                    className="mx-1"
-                    type="button"
-                    variant="danger"
-                    onClick={() => deleteHandler(user)}
-                    disabled={userInfo._id === user._id}//不可刪除自己
-                  >
-                    刪除
-                  </Button>
-                </td>
+        <>
+          <Helmet>用戶管理</Helmet>
+          <h3 className="my-3">用戶管理</h3>
+          <table className="table table-dark text-center">
+            <thead>
+              <tr>
+                <td>用戶編號</td>
+                <td>名稱</td>
+                <td>電子信箱</td>
+                <td>管理者</td>
+                <td>建立日期</td>
+                <td>功能</td>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {users.map((user) => (
+                <tr key={user._id}>
+                  <td>{user._id}</td>
+                  <td>{user.name}</td>
+                  <td>{user.email}</td>
+                  <td>{user.isAdmin ? "是" : "否"}</td>
+                  <td>{user.createdAt.substring(0, 10)}</td>
+                  <td>
+                    <Button
+                      className="mx-1"
+                      type="button"
+                      variant="success"
+                      onClick={() => navigate(`/admin/adminusers/${user._id}`)}
+                    >
+                      修改
+                    </Button>
+                    <Button
+                      className="mx-1"
+                      type="button"
+                      variant="danger"
+                      onClick={() => deleteHandler(user)}
+                      disabled={userInfo._id === user._id} //不可刪除自己
+                    >
+                      刪除
+                    </Button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </>
       )}
     </>
   );

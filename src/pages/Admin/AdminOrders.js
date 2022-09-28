@@ -74,65 +74,67 @@ function AdminOrders() {
 
   return (
     <>
-      <Helmet>訂單管理</Helmet>
-      <h3 className="my-3">訂單管理</h3>
       {loadingDelete && <LoadingBox></LoadingBox>}
       {loading ? (
         <LoadingBox></LoadingBox>
       ) : error ? (
         "發生錯誤"
       ) : (
-        <table className="table table-dark text-center">
-          <thead>
-            <tr>
-              <th>訂單編號</th>
-              <th>用戶</th>
-              <th>日期</th>
-              <th>金額</th>
-              <th>付款狀態</th>
-              <th>配送狀態</th>
-              <th>功能</th>
-            </tr>
-          </thead>
-          <tbody>
-            {orders.map((order) => (
-              <tr key={order._id}>
-                <td>{order._id}</td>
-                <td>{order.user ? order.user.name : "已刪除用戶"}</td>
-                <td>{order.createdAt.substring(0, 10)}</td>
-                <td>{order.totalPrice}</td>
-                <td>
-                  {order.isPaid ? order.paidAt.substring(0, 10) : "未付款"}
-                </td>
-                <td>
-                  {order.isDelivered
-                    ? order.deliveredAt.substring(0, 10)
-                    : "未送達"}
-                </td>
-                <td>
-                  <Button
-                    className="mx-1"
-                    type="button"
-                    variant="success"
-                    onClick={() => {
-                      navigate(`/orderpage/${order._id}`);
-                    }}
-                  >
-                    訂單明細
-                  </Button>
-                  <Button
-                    onClick={() => deleteHandler(order)}
-                    className="mx-1"
-                    type="button"
-                    variant="danger"
-                  >
-                    刪除
-                  </Button>
-                </td>
+        <>
+          <Helmet>訂單管理</Helmet>
+          <h3 className="my-3">訂單管理</h3>{" "}
+          <table className="table table-dark text-center">
+            <thead>
+              <tr>
+                <th>訂單編號</th>
+                <th>用戶</th>
+                <th>日期</th>
+                <th>金額</th>
+                <th>付款狀態</th>
+                <th>配送狀態</th>
+                <th>功能</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {orders.map((order) => (
+                <tr key={order._id}>
+                  <td>{order._id}</td>
+                  <td>{order.user ? order.user.name : "已刪除用戶"}</td>
+                  <td>{order.createdAt.substring(0, 10)}</td>
+                  <td>{order.totalPrice}</td>
+                  <td>
+                    {order.isPaid ? order.paidAt.substring(0, 10) : "未付款"}
+                  </td>
+                  <td>
+                    {order.isDelivered
+                      ? order.deliveredAt.substring(0, 10)
+                      : "未送達"}
+                  </td>
+                  <td>
+                    <Button
+                      className="mx-1"
+                      type="button"
+                      variant="success"
+                      onClick={() => {
+                        navigate(`/orderpage/${order._id}`);
+                      }}
+                    >
+                      訂單明細
+                    </Button>
+                    <Button
+                      onClick={() => deleteHandler(order)}
+                      className="mx-1"
+                      type="button"
+                      variant="danger"
+                    >
+                      刪除
+                    </Button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </>
       )}
     </>
   );

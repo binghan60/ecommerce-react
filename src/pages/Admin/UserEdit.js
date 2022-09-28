@@ -92,49 +92,50 @@ function UserEdit() {
   return (
     <>
       <Container className="w-50">
-        <Helmet>
-          <title>修改會員{userId}資料</title>
-        </Helmet>
-        <h3 className="my-3">會員編號{userId}</h3>
         {loading ? (
           <LoadingBox></LoadingBox>
         ) : error ? (
           "發生錯誤"
         ) : (
-          <Form onSubmit={submitHandler}>
-            <Form.Group className="mb-2" controlId="name">
-              <Form.Label>用戶名稱</Form.Label>
-              <Form.Control
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                required
-              />
-            </Form.Group>
-            <Form.Group className="mb-2" controlId="email">
-              <Form.Label>電子信箱</Form.Label>
-              <Form.Control
-                value={email}
-                type="email"
-                onChange={(e) => setEmail(e.target.value)}
-                required
-              />
-            </Form.Group>
-            <Form.Check
-              className="mb-2"
-              type="checkbox"
-              id="isAdmin"
-              label="isAdmin"
-              checked={isAdmin}
-              onChange={(e) => setIsAdmin(e.target.checked)}
-            ></Form.Check>
-
-            <div className="my-4 text-center">
-              <Button disabled={loadingUpdate} type="submit">
-                送出修改
-              </Button>
-              {loadingUpdate && <LoadingBox></LoadingBox>}
-            </div>
-          </Form>
+          <>
+            <Helmet>
+              <title>修改會員{userId}資料</title>
+            </Helmet>
+            <h3 className="my-3">會員編號{userId}</h3>{" "}
+            <Form onSubmit={submitHandler}>
+              <Form.Group className="mb-2" controlId="name">
+                <Form.Label>用戶名稱</Form.Label>
+                <Form.Control
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  required
+                />
+              </Form.Group>
+              <Form.Group className="mb-2" controlId="email">
+                <Form.Label>電子信箱</Form.Label>
+                <Form.Control
+                  value={email}
+                  type="email"
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                />
+              </Form.Group>
+              <Form.Check
+                className="mb-2"
+                type="checkbox"
+                id="isAdmin"
+                label="isAdmin"
+                checked={isAdmin}
+                onChange={(e) => setIsAdmin(e.target.checked)}
+              ></Form.Check>
+              <div className="my-4 text-center">
+                <Button disabled={loadingUpdate} type="submit">
+                  送出修改
+                </Button>
+                {loadingUpdate && <LoadingBox></LoadingBox>}
+              </div>
+            </Form>
+          </>
         )}
       </Container>
     </>
