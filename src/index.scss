@@ -24,16 +24,31 @@ header {
   }
 }
 
-.text36 {
-  font-size: 2rem;
+img {
+  object-fit: cover;
 }
 
 @media (max-width: 768px) {
+  //少於768套用CSS
   table {
     width: 100%;
     display: block;
     overflow-x: auto;
     white-space: nowrap;
+  }
+}
+@media (min-width: 768px) {
+  //超過768套用CSS
+  .bingCart {
+    height: 825px;
+    line-height: 825px;
+  }
+}
+@media (max-width: 768px) {
+  //少於768套用CSS
+  .bingCart {
+    height: 450px;
+    line-height: 450px;
   }
 }
 

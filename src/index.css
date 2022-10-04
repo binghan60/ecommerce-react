@@ -25,8 +25,9 @@ header a {
   color: #fff;
 }
 
-.text36 {
-  font-size: 2rem;
+img {
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 
 @media (max-width: 768px) {
@@ -35,6 +36,18 @@ header a {
     display: block;
     overflow-x: auto;
     white-space: nowrap;
+  }
+}
+@media (min-width: 768px) {
+  .bingCart {
+    height: 825px;
+    line-height: 825px;
+  }
+}
+@media (max-width: 768px) {
+  .bingCart {
+    height: 450px;
+    line-height: 450px;
   }
 }
 nav {
