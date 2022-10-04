@@ -29,13 +29,11 @@ function CartPage() {
   return (
     <>
       {cartItems.length === 0 ? (
-        <Col md={12}>
-          <Link to={"/productList"}>
-            <div className="mt-5">
-              <h5 className="text-center text36">尚未選購商品，點擊前往購物</h5>
-            </div>
-          </Link>
-        </Col>
+        <div>
+          <h5 className="text-center fs-2 bingCart">
+            <Link to={"/productList"}>尚未選購商品，點擊前往購物 </Link>
+          </h5>
+        </div>
       ) : (
         <Row>
           <>
@@ -44,25 +42,30 @@ function CartPage() {
               <title className="text-center">購物車</title>
             </Helmet>
             <h3 className="my-3">燒肉屋 | 購物車</h3>
-            <Col md={8}>
+            <Col md={8} className="mb-2">
               <ListGroup>
                 {cartItems.map((item) => {
                   return (
                     <ListGroup.Item key={item.slug}>
                       <Row className="align-items-center">
-                        <Col md={3}>
+                        <Col md={2}>
                           <img
                             className="w-100"
-                            src={`/imgs/${item.image}`}
+                            src={
+                              item.image && item.image.length > 20
+                                ? item.image
+                                : `/imgs/${item.image}`
+                            }
                             alt={item.name}
                           ></img>
                         </Col>
-                        <Col md={3}>
+                        <Col md={4} className="fs-5">
                           <Link to={`/ProductList/${item.slug}`}>
                             {item.name}
                           </Link>
                         </Col>
-                        <Col className="text-center" md={2}>
+                        <Col xs={6} md={3} className="text-center">
+                          {/* 購物車-1 */}
                           <Button
                             onClick={() =>
                               updateCartHandler(item, item.quantity - 1)
@@ -72,7 +75,8 @@ function CartPage() {
                           >
                             <i className="fa-sharp fa-solid fa-minus"></i>
                           </Button>
-                          <span> {item.quantity} </span>
+                          <span>　{item.quantity}　</span>
+                          {/* 購物車-1 */}
                           <Button
                             onClick={() =>
                               updateCartHandler(item, item.quantity + 1)
@@ -83,10 +87,10 @@ function CartPage() {
                             <i className="fa-sharp fa-solid fa-plus"></i>
                           </Button>
                         </Col>
-                        <Col className="text-center" md={2}>
+                        <Col xs={3} md={2} className="text-center">
                           ${item.price}
                         </Col>
-                        <Col className="text-center" md={2}>
+                        <Col xs={3} md={1} className="text-center">
                           <Button
                             onClick={() => removeItemHandler(item)}
                             variant="light"
