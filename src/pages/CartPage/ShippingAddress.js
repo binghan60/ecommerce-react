@@ -76,6 +76,7 @@ function ShippingAddress() {
               <h4>姓名</h4>
             </Form.Label>
             <Form.Control
+              placeholder="請輸入訂購人姓名"
               value={fullName}
               onChange={(e) => setFullName(e.target.value)}
               required
@@ -92,8 +93,9 @@ function ShippingAddress() {
             <Form.Label>
               <h4>地址</h4>
             </Form.Label>
-            <div className="d-flex mb-4">
+            <div className="d-flex justify-content-between mb-4">
               <Form.Select
+                style={{ width: "45%" }}
                 value={countryIndex}
                 onChange={(e) => {
                   // e.target.value為字串類型(由網頁上傳入都是字串值)
@@ -115,6 +117,7 @@ function ShippingAddress() {
                 })}
               </Form.Select>
               <Form.Select
+                style={{ width: "45%" }}
                 value={townshipIndex}
                 onChange={(e) => {
                   // e.target.value為字串類型(由網頁上傳入都是字串值)
@@ -136,6 +139,7 @@ function ShippingAddress() {
               </Form.Select>
             </div>
             <Form.Control
+              placeholder="請輸入詳細地址"
               value={address}
               onChange={(e) => setAddress(e.target.value)}
               required

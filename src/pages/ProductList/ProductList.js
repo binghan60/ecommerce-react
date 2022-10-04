@@ -145,8 +145,8 @@ function SearchPage() {
             <ul>
               <li>
                 <Link
-                  className={"all" === category ? "text-bold" : ""}
-                  to={getFilterUrl({ category: "all" })}//解構形式參數的category
+                  className={"all" === category ? "text-bold" : "fs-5"}
+                  to={getFilterUrl({ category: "all" })} //解構形式參數的category
                 >
                   顯示全部
                 </Link>
@@ -155,7 +155,7 @@ function SearchPage() {
                 <li key={c}>
                   <Link
                     //假如網址的category 跟 c一樣 就顯示粗體
-                    className={c === category ? "text-bold" : ""}
+                    className={c === category ? "text-bold" : "fs-5"}
                     to={getFilterUrl({ category: c })}
                   >
                     {c}
@@ -169,7 +169,7 @@ function SearchPage() {
             <ul>
               <li>
                 <Link
-                  className={"all" === price ? "text-bold" : ""}
+                  className={"all" === price ? "text-bold" : "fs-5"}
                   to={getFilterUrl({ price: "all" })}
                 >
                   顯示全部
@@ -179,7 +179,7 @@ function SearchPage() {
                 <li key={p.value}>
                   <Link
                     to={getFilterUrl({ price: p.value })}
-                    className={p.value === price ? "text-bold" : ""}
+                    className={p.value === price ? "text-bold" : "fs-5"}
                   >
                     {p.name}
                   </Link>
@@ -193,7 +193,7 @@ function SearchPage() {
               <li>
                 <Link
                   to={getFilterUrl({ rating: "all" })}
-                  className={rating === "all" ? "text-bold" : ""}
+                  className={rating === "all" ? "text-bold" : "fs-5"}
                 >
                   顯示全部
                 </Link>
@@ -202,7 +202,9 @@ function SearchPage() {
                 <li key={r.name}>
                   <Link
                     to={getFilterUrl({ rating: r.rating })}
-                    className={`${r.rating}` === `${rating}` ? "text-bold" : ""}
+                    className={
+                      `${r.rating}` === `${rating}` ? "text-bold" : "fs-5"
+                    }
                   >
                     <Rating ratingTitle={" "} rating={r.rating}></Rating>
                   </Link>
@@ -247,7 +249,7 @@ function SearchPage() {
                   </div>
                 </Col>
                 <Col md={4} className="text-end">
-                  <h5>
+                  <h5 className="fs-5">
                     {"排序方式 :" + " "}
                     <select
                       value={order}

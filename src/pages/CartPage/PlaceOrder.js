@@ -123,7 +123,11 @@ function PlaceOrder() {
                         <Col md={2}>
                           <img
                             className="w-100 rounded"
-                            src={`/imgs/${item.image}`}
+                            src={
+                              item.image && item.image.length > 20
+                                ? item.image
+                                : `/imgs/${item.image}`
+                            }
                             alt={item.name}
                           />
                         </Col>

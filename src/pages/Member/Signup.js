@@ -60,6 +60,7 @@ function Signup() {
             <h4>Name</h4>
           </Form.Label>
           <Form.Control
+            placeholder="請輸入暱稱"
             type="text"
             required
             onChange={(e) => setName(e.target.value)}
@@ -70,6 +71,7 @@ function Signup() {
             <h4>Email</h4>
           </Form.Label>
           <Form.Control
+            placeholder="請輸入電子信箱"
             type="email"
             required
             onChange={(e) => setEmail(e.target.value)}
@@ -80,6 +82,7 @@ function Signup() {
             <h4>Password</h4>
           </Form.Label>
           <Form.Control
+            placeholder="請輸入密碼"
             type="Password"
             required
             onChange={(e) => setPassword(e.target.value)}
@@ -90,6 +93,7 @@ function Signup() {
             <h4>ConfirmPassword</h4>
           </Form.Label>
           <Form.Control
+            placeholder="請再次輸入密碼"
             type="Password"
             required
             onChange={(e) => setConfirmPassword(e.target.value)}

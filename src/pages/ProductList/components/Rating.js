@@ -60,7 +60,7 @@ function Rating(props) {
           ></i>
         </span>
       </div>
-      {ratingTitle ? <span>{ratingTitle}</span> : <span>{numReviews}人已評價</span>}
+      {ratingTitle ? <span>{ratingTitle}</span> : <span>{numReviews}評價</span>}
     </div>
   );
 }

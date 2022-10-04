@@ -56,6 +56,7 @@ function Signin() {
             <h4>電子信箱</h4>
           </Form.Label>
           <Form.Control
+            placeholder="請輸入電子信箱"
             type="email"
             required
             onChange={(e) => setEmail(e.target.value)}
@@ -66,6 +67,7 @@ function Signin() {
             <h4>密碼</h4>
           </Form.Label>
           <Form.Control
+            placeholder="請輸入密碼"
             type="Password"
             required
             onChange={(e) => setPassword(e.target.value)}

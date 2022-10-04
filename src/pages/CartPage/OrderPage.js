@@ -162,20 +162,22 @@ function OrderPage() {
   ]);
 
   async function deliverFinishHandler() {
-    try {
-      dispatch({ type: "DELIVER_REQUEST" });
-      const { data } = await axios.put(
-        `http://localhost:5000/api/orders/${order._id}/deliver`,
-        {},
-        {
-          headers: { authorization: `Bearer ${userInfo.token}` },
-        }
-      );
-      dispatch({ type: "DELIVER_SUCCESS", payload: data });
-      toast.success("配送成功");
-    } catch (err) {
-      toast.error("配送失敗");
-      dispatch({ type: "DELIVER_FAIL" });
+    if (window.confirm("確認要送達嗎?")) {
+      try {
+        dispatch({ type: "DELIVER_REQUEST" });
+        const { data } = await axios.put(
+          `http://localhost:5000/api/orders/${order._id}/deliver`,
+          {},
+          {
+            headers: { authorization: `Bearer ${userInfo.token}` },
+          }
+        );
+        dispatch({ type: "DELIVER_SUCCESS", payload: data });
+        toast.success("配送成功");
+      } catch (err) {
+        toast.error("配送失敗");
+        dispatch({ type: "DELIVER_FAIL" });
+      }
     }
   }
   return (
@@ -206,9 +208,10 @@ function OrderPage() {
                       {order.shippingAddress.address}
                       <br />
                       <strong>配送狀態：</strong>
-                      {order.isDeliverd ? (
+                      {console.log(order.isDelivered)}
+                      {order.isDelivered ? (
                         <span variant="success">
-                          已於{order.deliveredAt}送達
+                          已於{order.deliveredAt.substring(0, 10)}送達
                         </span>
                       ) : (
                         <span variant="danger">尚未送達</span>
@@ -243,7 +246,11 @@ function OrderPage() {
                               <Col md={2}>
                                 <img
                                   className="w-100"
-                                  src={`/imgs/${item.image}`}
+                                  src={
+                                    item.image && item.image.length > 20
+                                      ? item.image
+                                      : `/imgs/${item.image}`
+                                  }
                                   alt={item.name}
                                 ></img>
                               </Col>
@@ -289,8 +296,8 @@ function OrderPage() {
                           <Col>{order.totalPrice} 元</Col>
                         </Row>
                       </ListGroup.Item>
-                      {/* 管理者 或 已付款 不顯示按鈕*/}
-                      {!userInfo.isAdmin && !order.isPaid && (
+                      {/*已付款 不顯示按鈕*/}
+                      {!order.isPaid && (
                         <ListGroup.Item>
                           {isPending ? (
                             <LoadingBox></LoadingBox>
@@ -309,7 +316,7 @@ function OrderPage() {
                           {loadingPay && <LoadingBox></LoadingBox>}
                         </ListGroup.Item>
                       )}
-                      {/* 管理者 或 已付款且尚未送達  才可點擊 */}
+                      {/* 管理者 且 已付款且尚未送達  才可點擊 */}
                       {userInfo.isAdmin && order.isPaid && !order.isDelivered && (
                         <ListGroup.Item>
                           {loadingDeliver && <LoadingBox></LoadingBox>}
