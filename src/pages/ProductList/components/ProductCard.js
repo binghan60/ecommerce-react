@@ -31,7 +31,8 @@ function ProductCard(props) {
       <Link to={`/productList/${ProductData.slug}`}>
         <img
           className="w-100 pb-3"
-          src={//長度超過20就用雲端
+          src={
+            //長度超過20就用雲端
             ProductData.image.length > 20
               ? ProductData.image
               : `/imgs/${ProductData.image}`
@@ -39,22 +40,23 @@ function ProductCard(props) {
           alt=""
         />
       </Link>
-      <h6 className="flex-grow-1 text-break">{ProductData.name}</h6>
+      <h6 className="flex-grow-1 text-break fs-5">{ProductData.name}</h6>
       <Rating
         rating={ProductData.rating}
         numReviews={ProductData.numReviews}
       ></Rating>
       <div>
         <strong>{ProductData.price}元</strong>
-        <span className="float-end">庫存尚有{ProductData.countInStock}份</span>
+        <span className="float-end">尚有{ProductData.countInStock}份</span>
       </div>
       <div className="text-center">
         {ProductData.countInStock === 0 ? (
-          <Button variant="danger" disabled>
+          <Button className="fs-5" variant="danger" disabled>
             商品補貨中
           </Button>
         ) : (
           <Button
+            className="fs-5"
             onClick={() => addToCartHandler(ProductData)}
             variant="success"
           >
