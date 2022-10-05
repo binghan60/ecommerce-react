@@ -2,6 +2,7 @@ import axios from "axios";
 import { useContext, useEffect, useReducer } from "react";
 import { Button } from "react-bootstrap";
 import { Helmet } from "react-helmet-async";
+import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import LoadingBox from "../../components/LoadingBox";
@@ -98,7 +99,9 @@ function AdminOrders() {
             <tbody>
               {orders.map((order) => (
                 <tr key={order._id}>
-                  <td>{order._id}</td>
+                  <td>
+                    <Link to={`/orderpage/${order._id}`}>{order._id}</Link>
+                  </td>
                   <td>{order.user ? order.user.name : "已刪除用戶"}</td>
                   <td>{order.createdAt.substring(0, 10)}</td>
                   <td>{order.totalPrice}</td>
