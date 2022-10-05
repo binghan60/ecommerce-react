@@ -50,87 +50,89 @@ function Dashboard() {
       ) : error ? (
         error
       ) : (
-        <div className="dashboard">
-          <Helmet>
-            <title>管理面板</title>
-          </Helmet>
+        <>
           <h3 className="my-3">歡迎{userInfo.name}主管</h3>
-          <Row>
-            <Col md={4}>
-              <Card className="text-center">
-                <Card.Body>
-                  <Card.Title>
-                    本站註冊帳號數量為
-                    {summary.users && summary.users[0]
-                      ? summary.users[0].numUsers
-                      : 0}
-                    個
-                  </Card.Title>
-                </Card.Body>
-              </Card>
-            </Col>
-            <Col md={4}>
-              <Card className="text-center">
-                <Card.Body>
-                  <Card.Title>
-                    總銷售金額為
-                    {summary.orders && summary.users[0]
-                      ? summary.orders[0].totalSales
-                      : 0}
-                    元
-                  </Card.Title>
-                </Card.Body>
-              </Card>
-            </Col>
-            <Col md={4}>
-              <Card className="text-center">
-                <Card.Body>
-                  <Card.Title>
-                    已結帳
-                    {summary.orders && summary.users[0]
-                      ? summary.orders[0].numOrders
-                      : 0}
-                    筆訂單
-                  </Card.Title>
-                </Card.Body>
-              </Card>
-            </Col>
-          </Row>
-          <div className="my-3">
-            <h5 style={{ color: "#fff" }}>銷售金額走勢</h5>
-            {summary.dailyOrders.length === 0 ? (
-              "尚未有訂單"
-            ) : (
-              <Chart
-                width="100%"
-                height="300px"
-                chartType="AreaChart" //折線圖
-                loader={<div>圖表載入中,請稍候...</div>}
-                data={[
-                  ["日期", "金額"], //X軸 Y軸
-                  ...summary.dailyOrders.map((x) => [x._id, x.sales]), //圖表資料
-                ]}
-              ></Chart>
-            )}
+          <div className="dashboard">
+            <Helmet>
+              <title>管理面板</title>
+            </Helmet>
+            <Row>
+              <Col md={4}>
+                <Card className="text-center my-2">
+                  <Card.Body>
+                    <Card.Title>
+                      註冊帳號數量為
+                      {summary.users && summary.users[0]
+                        ? summary.users[0].numUsers
+                        : 0}
+                      個
+                    </Card.Title>
+                  </Card.Body>
+                </Card>
+              </Col>
+              <Col md={4}>
+                <Card className="text-center my-2">
+                  <Card.Body>
+                    <Card.Title>
+                      總銷售金額為
+                      {summary.orders && summary.users[0]
+                        ? summary.orders[0].totalSales
+                        : 0}
+                      元
+                    </Card.Title>
+                  </Card.Body>
+                </Card>
+              </Col>
+              <Col md={4}>
+                <Card className="text-center my-2">
+                  <Card.Body>
+                    <Card.Title>
+                      已結帳
+                      {summary.orders && summary.users[0]
+                        ? summary.orders[0].numOrders
+                        : 0}
+                      筆訂單
+                    </Card.Title>
+                  </Card.Body>
+                </Card>
+              </Col>
+            </Row>
+            <div className="my-3">
+              <h5 style={{ color: "#fff" }}>銷售金額走勢</h5>
+              {summary.dailyOrders.length === 0 ? (
+                "尚未有訂單"
+              ) : (
+                <Chart
+                  width="100%"
+                  height="300px"
+                  chartType="AreaChart" //折線圖
+                  loader={<div>圖表載入中,請稍候...</div>}
+                  data={[
+                    ["日期", "金額"], //X軸 Y軸
+                    ...summary.dailyOrders.map((x) => [x._id, x.sales]), //圖表資料
+                  ]}
+                ></Chart>
+              )}
+            </div>
+            <div className="my-3">
+              <h5 style={{ color: "#fff" }}>全站商品種類佔比</h5>
+              {summary.productCategories.length === 0 ? (
+                "尚未有訂單"
+              ) : (
+                <Chart
+                  width="100%"
+                  height="350px"
+                  chartType="PieChart" //圓餅圖
+                  loader={<div>圖表載入中,請稍候...</div>}
+                  data={[
+                    ["種類", "商品名稱"], //X軸 Y軸
+                    ...summary.productCategories.map((x) => [x._id, x.count]), //圖表資料
+                  ]}
+                ></Chart>
+              )}
+            </div>
           </div>
-          <div className="my-3">
-            <h5 style={{ color: "#fff" }}>全站商品種類佔比</h5>
-            {summary.productCategories.length === 0 ? (
-              "尚未有訂單"
-            ) : (
-              <Chart
-                width="100%"
-                height="250px"
-                chartType="PieChart" //圓餅圖
-                loader={<div>圖表載入中,請稍候...</div>}
-                data={[
-                  ["種類", "商品名稱"], //X軸 Y軸
-                  ...summary.productCategories.map((x) => [x._id, x.count]), //圖表資料
-                ]}
-              ></Chart>
-            )}
-          </div>
-        </div>
+        </>
       )}
     </>
   );
