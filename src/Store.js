@@ -84,6 +84,6 @@ function reducer(state, action) {
 
 export function StoreProvider(props) {
   const [state, dispatch] = useReducer(reducer, initialState);
-  const value = { state, dispatch };
+  const value = { state, dispatch };//要共享整個app的狀態
   return <Store.Provider value={value}>{props.children} </Store.Provider>;
 }

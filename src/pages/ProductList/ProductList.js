@@ -69,7 +69,7 @@ export const ratings = [
   },
 ];
 
-function SearchPage() {
+function ProductList() {
   const navigate = useNavigate();
   const { search } = useLocation();
   const sp = new URLSearchParams(search); // /search?category=Shirts
@@ -301,4 +301,4 @@ function SearchPage() {
   );
 }
 
-export default SearchPage;
+export default ProductList;
