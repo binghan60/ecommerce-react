@@ -14,9 +14,9 @@ function NavbarComponent() {
   return (
     <>
       <Navbar expand="lg" bg="warning" variant="dark">
-        <Container>
-          <LinkContainer to="/">
-            <Navbar.Brand>  <img className="w-100" src="/imgs/logo1.png" alt="" /> </Navbar.Brand>
+        <Container className="h-100">
+          <LinkContainer className="h-100" to="/">
+            <Navbar.Brand><img className="h-100" src="/imgs/logo1.png" alt="" /> </Navbar.Brand>
           </LinkContainer>
           {/* 漢堡 */}
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
