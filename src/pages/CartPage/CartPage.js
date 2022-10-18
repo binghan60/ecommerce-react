@@ -31,11 +31,11 @@ function CartPage() {
       {cartItems.length === 0 ? (
         <div>
           <h5 className="text-center fs-2 bingCart">
-            <Link to={"/productList"}>尚未選購商品，點擊前往購物 </Link>
+            <Link className="text-white" to={"/productList"}>尚未選購商品，點擊前往購物 </Link>
           </h5>
         </div>
       ) : (
-        <Container>
+        <Container className="mt-5">
           <Row>
             <>
               <CheckoutSteps step1></CheckoutSteps>

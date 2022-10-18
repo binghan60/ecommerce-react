@@ -1,7 +1,80 @@
 import { Col, Container, Row } from "react-bootstrap";
 import MyButton from "../../components/MyButton";
 import Rating from "../ProductList/components/Rating";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useEffect, useRef } from "react";
+gsap.registerPlugin(ScrollTrigger);
 function Home() {
+  const cardRef1 = useRef(null);
+  const cardRef2 = useRef(null);
+  const cardRef3 = useRef(null);
+  const cardRef4 = useRef(null);
+  const cardRef5 = useRef(null);
+  const cardRef6 = useRef(null);
+  useEffect(() => {
+    gsap.from(cardRef1.current, {
+      delay: 0,
+      opacity: 0,
+      y: -150,
+      duration: 1.5,
+      scrollTrigger: {
+        trigger: cardRef1.current,
+        toggleActions: "restart reverse restart none",
+      },
+    });
+    gsap.from(cardRef2.current, {
+      delay: 0.25,
+      rotation: -180,
+      opacity: 0,
+      y: -150,
+      duration: 1.5,
+      scrollTrigger: {
+        trigger: cardRef1.current,
+        toggleActions: "restart reverse restart none",
+      },
+    });
+    gsap.from(cardRef3.current, {
+      delay: 0.5,
+      opacity: 0,
+      y: -150,
+      duration: 1.5,
+      scrollTrigger: {
+        trigger: cardRef1.current,
+        toggleActions: "restart reverse restart none",
+      },
+    });
+    gsap.from(cardRef4.current, {
+      delay: 0.75,
+      opacity: 0,
+      y: -150,
+      duration: 1.5,
+      scrollTrigger: {
+        trigger: cardRef1.current,
+        toggleActions: "restart reverse restart none",
+      },
+    });
+    gsap.from(cardRef5.current, {
+      delay: 1,
+      opacity: 0,
+      y: -150,
+      duration: 1.5,
+      scrollTrigger: {
+        trigger: cardRef1.current,
+        toggleActions: "restart reverse restart none",
+      },
+    });
+    gsap.from(cardRef6.current, {
+      delay: 1.25,
+      opacity: 0,
+      y: -150,
+      duration: 1.5,
+      scrollTrigger: {
+        trigger: cardRef1.current,
+        toggleActions: "restart reverse restart none",
+      },
+    });
+  }, []);
   return (
     <>
       <section>
@@ -16,7 +89,7 @@ function Home() {
         <Container className="mt-5 mb-5">
           <Row>
             <Col xs={12} md={4}>
-              <div className="cardBorder text-center">
+              <div className="cardBorder text-center" ref={cardRef1}>
                 <h4 className="fs-3">Food</h4>
                 <p>
                   Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum
@@ -29,7 +102,7 @@ function Home() {
               </div>
             </Col>
             <Col xs={12} md={4}>
-              <div className="cardImgWrap">
+              <div className="cardImgWrap" ref={cardRef2}>
                 <img
                   className="w-100 h-100"
                   src="/imgs/nHDtjguNzm_small.png"
@@ -38,7 +111,7 @@ function Home() {
               </div>
             </Col>
             <Col xs={12} md={4}>
-              <div className="cardBorder text-center">
+              <div className="cardBorder text-center" ref={cardRef3}>
                 <h4 className="fs-3">Drink</h4>
                 <p className="">
                   Lorem ipsum dolor sit, amet consectetur adipisicing elit.
@@ -51,7 +124,7 @@ function Home() {
               </div>
             </Col>
             <Col xs={12} md={4}>
-              <div className="cardImgWrap">
+              <div className="cardImgWrap" ref={cardRef4}>
                 <img
                   className="w-100 h-100"
                   src="/imgs/Negroni-recept.jpg"
@@ -60,7 +133,7 @@ function Home() {
               </div>
             </Col>
             <Col xs={12} md={4}>
-              <div className="cardBorder text-center">
+              <div className="cardBorder text-center" ref={cardRef5}>
                 <h4 className="fs-3">ICE CREAM</h4>
                 <p>
                   Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi
@@ -72,7 +145,7 @@ function Home() {
               </div>
             </Col>
             <Col xs={12} md={4}>
-              <div className="cardImgWrap">
+              <div className="cardImgWrap" ref={cardRef6}>
                 <img className="w-100 h-100" src="/imgs/abe363eb.jpg" alt="" />
               </div>
             </Col>

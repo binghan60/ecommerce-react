@@ -73,7 +73,7 @@ nav .dropdown-menu {
 
 section > .home {
   background: url(./imgs/home/89A1665.jpg) no-repeat center/cover;
-  min-height: 100vh;
+  min-height: 1100px;
   letter-spacing: 1rem;
 }
 
@@ -95,6 +95,11 @@ section > .home {
 .productImg {
   width: 100%;
   height: 250px;
+  transition: all 0.5s;
+  cursor: pointer;
+}
+.productImg:hover {
+  transform: scale(1.1);
 }
 
 .cusborder {

@@ -145,7 +145,7 @@ function ProductList() {
             <ul>
               <li>
                 <Link
-                  className={"all" === category ? "text-bold" : "fs-5"}
+                  className={"all" === category ? "text-bold text-white" : "fs-5 text-white"}
                   to={getFilterUrl({ category: "all" })} //解構形式參數的category
                 >
                   顯示全部
@@ -155,7 +155,7 @@ function ProductList() {
                 <li key={c}>
                   <Link
                     //假如網址的category 跟 c一樣 就顯示粗體
-                    className={c === category ? "text-bold" : "fs-5"}
+                    className={c === category ? "text-bold text-white" : "fs-5 text-white"}
                     to={getFilterUrl({ category: c })}
                   >
                     {c}
@@ -169,7 +169,7 @@ function ProductList() {
             <ul>
               <li>
                 <Link
-                  className={"all" === price ? "text-bold" : "fs-5"}
+                  className={"all" === price ? "text-bold text-white" : "fs-5 text-white"}
                   to={getFilterUrl({ price: "all" })}
                 >
                   顯示全部
@@ -179,7 +179,7 @@ function ProductList() {
                 <li key={p.value}>
                   <Link
                     to={getFilterUrl({ price: p.value })}
-                    className={p.value === price ? "text-bold" : "fs-5"}
+                    className={p.value === price ? "text-bold text-white" : "fs-5 text-white"}
                   >
                     {p.name}
                   </Link>
@@ -193,7 +193,7 @@ function ProductList() {
               <li>
                 <Link
                   to={getFilterUrl({ rating: "all" })}
-                  className={rating === "all" ? "text-bold" : "fs-5"}
+                  className={rating === "all" ? "text-bold text-white" : "fs-5 text-white"}
                 >
                   顯示全部
                 </Link>
