@@ -42,7 +42,7 @@ function CartPage() {
               <Helmet>
                 <title className="text-center">購物車</title>
               </Helmet>
-              <h3 className="my-3">燒肉屋 | 購物車</h3>
+              <h3 className="my-3">Curve Tail | 購物車</h3>
               <Col md={8} className="mb-2">
                 <ListGroup>
                   {cartItems.map((item) => {

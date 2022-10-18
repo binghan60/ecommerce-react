@@ -31,7 +31,7 @@ function App() {
     <>
       <BrowserRouter>
         <Helmet>
-          <title>燒肉屋</title>
+          <title>Curve Tail</title>
         </Helmet>
         <ToastContainer position="bottom-center" limit={1} />
         <div className="d-flex flex-column site-container">
