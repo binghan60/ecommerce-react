@@ -4,7 +4,7 @@ import { Helmet } from "react-helmet-async";
 import { toast } from "react-toastify";
 import { Store } from "../../Store";
 import LoadingBox from "../../components/LoadingBox";
-import { Button } from "react-bootstrap";
+import { Button, Container } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
 const reducer = (state, action) => {
@@ -82,7 +82,7 @@ function AdminUsers() {
       ) : error ? (
         "發生錯誤"
       ) : (
-        <>
+        <Container className="mt-5">
           <Helmet>用戶管理</Helmet>
           <h3 className="my-3">用戶管理</h3>
           <table className="table table-dark text-center">
@@ -127,7 +127,7 @@ function AdminUsers() {
               ))}
             </tbody>
           </table>
-        </>
+        </Container>
       )}
     </>
   );

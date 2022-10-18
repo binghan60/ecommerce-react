@@ -27,7 +27,7 @@ function ProductCard(props) {
     });
   };
   return (
-    <div className="h-100 d-flex flex-column ">
+    <div className="h-100 d-flex flex-column">
       <Link to={`/productList/${ProductData.slug}`}>
         <img
           className="w-100 pb-3"
@@ -40,12 +40,12 @@ function ProductCard(props) {
           alt=""
         />
       </Link>
-      <h6 className="flex-grow-1 text-break fs-5">{ProductData.name}</h6>
+      <h6 className="flex-grow-1 text-break fs-6">{ProductData.name}</h6>
       <Rating
         rating={ProductData.rating}
         numReviews={ProductData.numReviews}
       ></Rating>
-      <div>
+      <div className="fs-5">
         <strong>{ProductData.price}元</strong>
         <span className="float-end">尚有{ProductData.countInStock}份</span>
       </div>

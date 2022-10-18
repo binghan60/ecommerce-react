@@ -1,9 +1,8 @@
 body {
   //避免scroll bar擠壓爆版
   overflow-y: overlay;
-  background-color: #000;
-  font-family: "Noto Sans TC", sans-serif;
-  font-family: "Roboto", sans-serif;
+  background-color: #0b1314;
+  font-family: 'Playfair Display', serif;
   color: #fff;
 }
 main {
@@ -53,6 +52,8 @@ img {
 }
 
 @import "./components/Navbar";
+@import "./pages/Home/home";
+@import "./components/MyButton";
 @import "./pages/ProductList/components/Rating";
 @import "./pages/CartPage/components/CheckoutSteps";
 @import "./pages/ProductList/ProductList";

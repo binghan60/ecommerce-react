@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useReducer, useEffect, useContext } from "react";
-import { Button, Col, Row } from "react-bootstrap";
+import { Button, Col, Container, Row } from "react-bootstrap";
 import { Helmet } from "react-helmet-async";
 import { LinkContainer } from "react-router-bootstrap";
 import { Link, useLocation, useNavigate } from "react-router-dom";
@@ -139,13 +139,13 @@ function AdminProducts() {
       ) : error ? (
         "發生錯誤"
       ) : (
-        <>
+        <Container className="mt-5">
           <Helmet>
             <title className="text-center">商品管理</title>
           </Helmet>
           <Row>
             <Col>
-              <h3 className="my-3">商品管理</h3>
+              <h3 className="mb-3">商品管理</h3>
             </Col>
             <Col className="col text-end">
               <Button type="button" onClick={createHandler}>
@@ -201,7 +201,7 @@ function AdminProducts() {
               </tbody>
             </table>
           </Row>
-        </>
+        </Container>
       )}
     </>
   );

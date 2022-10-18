@@ -1,0 +1,11 @@
+.Mybutton {
+  background-color: transparent;
+  color: #fff;
+  border: 2px solid #fff;
+  padding: 0.25rem  2rem 0.25rem 2rem;
+  transition: all 0.5s;
+  &:hover {
+    background: #fff;
+    color: black;
+  }
+}

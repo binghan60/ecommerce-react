@@ -1,0 +1,73 @@
+section > .home {
+  background: url(./imgs/home/89A1665.jpg) no-repeat center / cover;
+  min-height: 100vh;
+  letter-spacing: 1rem;
+}
+
+.cardBorder {
+  border: 90px solid;
+  border-image: url(./imgs/home/border.png) 135;
+  height: 100%;
+}
+.cardImgWrap {
+  height: 475px;
+}
+
+.shopDecor {
+  width: 50%;
+}
+
+.productImg {
+  width: 100%;
+  height: 250px;
+}
+.cusborder {
+  border: 75px solid;
+  border-image: url(./imgs/home/border.png) 135;
+  height: 100%;
+}
+
+@media (max-width: 1440px) {
+  //小於1440
+
+  .cardBorder {
+    border: 75px solid;
+    border-image: url(./imgs/home/border.png) 135;
+  }
+}
+@media (max-width: 1200px) {
+  //小於1200
+
+  .cardBorder {
+    border: 40px solid;
+    border-image: url(./imgs/home/border.png) 135;
+  }
+}
+@media (max-width: 768px) {
+  //小於768
+
+  .cardBorder {
+    border: 40px solid;
+    border-image: url(./imgs/home/border.png) 135;
+  }
+  .shopDecor {
+    width: 100%;
+  }
+}
+
+@media (max-width: 512px) {
+  //小於512
+  section .home {
+    background: url(./imgs/home/89A1665.jpg) no-repeat center / cover;
+    min-height: 50vh;
+    letter-spacing: 0.5rem;
+  }
+  .cardBorder {
+    border: 50px solid;
+    border-image: url(./imgs/home/border.png) 135;
+  }
+}
+
+/*如果螢幕寬度為 400px 以上 且 700px 以下，就套用 css 設定*/
+@media screen and (min-width: 400px) and (max-width: 700px) {
+}

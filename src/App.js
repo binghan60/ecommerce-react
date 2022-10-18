@@ -35,11 +35,8 @@ function App() {
         </Helmet>
         <ToastContainer position="bottom-center" limit={1} />
         <div className="d-flex flex-column site-container">
-          <header className="mb-5">
             <NavbarComponent />
-          </header>
           <main>
-            <Container>
               <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/signin" element={<Signin />} />
@@ -125,7 +122,6 @@ function App() {
                   }
                 />
               </Routes>
-            </Container>
           </main>
           <Footer />
         </div>

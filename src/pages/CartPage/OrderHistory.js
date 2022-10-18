@@ -5,7 +5,7 @@ import LoadingBox from "../../components/LoadingBox";
 import { useNavigate } from "react-router-dom";
 import { useReducer } from "react";
 import axios from "axios";
-import { Button } from "react-bootstrap";
+import { Button, Container } from "react-bootstrap";
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -48,7 +48,7 @@ function OrderHistory() {
   }, [userInfo]);
 
   return (
-    <div>
+    <Container>
       <Helmet>
         <title>歷史訂單</title>
       </Helmet>
@@ -99,7 +99,7 @@ function OrderHistory() {
           </tbody>
         </table>
       )}
-    </div>
+    </Container>
   );
 }
 

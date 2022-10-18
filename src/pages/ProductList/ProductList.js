@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 import { Helmet } from "react-helmet-async";
 import Rating from "./components/Rating";
 import LoadingBox from "../../components/LoadingBox";
-import { Row, Col, Button } from "react-bootstrap";
+import { Row, Col, Button, Container } from "react-bootstrap";
 import LinkContainer from "react-router-bootstrap/LinkContainer";
 import ProductCard from "./components/ProductCard";
 import SearchBox from "../../components/SerachBox";
@@ -131,7 +131,7 @@ function ProductList() {
     return `/productlist?category=${filterCategory}&query=${filterQuery}&price=${filterPrice}&rating=${filterRating}&order=${sortOrder}&page=${filterPage}`;
   };
   return (
-    <div>
+    <Container className="mt-5">
       <Helmet>
         <title>購物商城</title>
       </Helmet>
@@ -297,7 +297,7 @@ function ProductList() {
           )}
         </Col>
       </Row>
-    </div>
+    </Container>
   );
 }
 

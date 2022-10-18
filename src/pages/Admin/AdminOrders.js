@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useContext, useEffect, useReducer } from "react";
-import { Button } from "react-bootstrap";
+import { Button, Container } from "react-bootstrap";
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
@@ -81,7 +81,7 @@ function AdminOrders() {
       ) : error ? (
         "發生錯誤"
       ) : (
-        <>
+        <Container className="mt-5">
           <Helmet>訂單管理</Helmet>
           <h3 className="my-3">訂單管理</h3>{" "}
           <table className="table table-dark text-center">
@@ -137,7 +137,7 @@ function AdminOrders() {
               ))}
             </tbody>
           </table>
-        </>
+        </Container>
       )}
     </>
   );

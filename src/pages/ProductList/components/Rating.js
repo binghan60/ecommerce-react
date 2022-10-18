@@ -1,9 +1,9 @@
 function Rating(props) {
   const { rating, numReviews, ratingTitle } = props;
   return (
-    <div className="d-flex justify-content-between">
+    <>
       <div className="rating">
-      {/* rating符合整數就1顆星 否則往下修 */}
+        {/* rating符合整數就1顆星 否則往下修 */}
         <span>
           <i
             className={
@@ -61,7 +61,7 @@ function Rating(props) {
         </span>
       </div>
       {ratingTitle ? <span>{ratingTitle}</span> : <span>{numReviews}評價</span>}
-    </div>
+    </>
   );
 }
 

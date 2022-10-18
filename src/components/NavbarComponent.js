@@ -16,7 +16,7 @@ function NavbarComponent() {
       <Navbar expand="lg" bg="warning" variant="dark">
         <Container>
           <LinkContainer to="/">
-            <Navbar.Brand>MeowMeat</Navbar.Brand>
+            <Navbar.Brand>  <img className="w-100" src="/imgs/logo1.png" alt="" /> </Navbar.Brand>
           </LinkContainer>
           {/* 漢堡 */}
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -25,9 +25,9 @@ function NavbarComponent() {
               <Link className="nav-link" to={"/productlist"}>
                 購物商城
               </Link>
-              <Link className="nav-link" to={"/reserve"}>
+              {/* <Link className="nav-link" to={"/reserve"}>
                 立即訂位
-              </Link>
+              </Link> */}
               <Link className="nav-link" to="/cartpage">
                 購物車
                 {cart.cartItems.length > 0 && (

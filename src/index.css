@@ -1,8 +1,8 @@
+@charset "UTF-8";
 body {
   overflow-y: overlay;
-  background-color: #000;
-  font-family: "Noto Sans TC", sans-serif;
-  font-family: "Roboto", sans-serif;
+  background-color: #0b1314;
+  font-family: "Playfair Display", serif;
   color: #fff;
 }
 
@@ -69,6 +69,88 @@ nav a:hover {
 }
 nav .dropdown-menu {
   background-color: #ffc107 !important;
+}
+
+section > .home {
+  background: url(./imgs/home/89A1665.jpg) no-repeat center/cover;
+  min-height: 100vh;
+  letter-spacing: 1rem;
+}
+
+.cardBorder {
+  border: 90px solid;
+  -o-border-image: url(./imgs/home/border.png) 135;
+     border-image: url(./imgs/home/border.png) 135;
+  height: 100%;
+}
+
+.cardImgWrap {
+  height: 475px;
+}
+
+.shopDecor {
+  width: 50%;
+}
+
+.productImg {
+  width: 100%;
+  height: 250px;
+}
+
+.cusborder {
+  border: 75px solid;
+  -o-border-image: url(./imgs/home/border.png) 135;
+     border-image: url(./imgs/home/border.png) 135;
+  height: 100%;
+}
+
+@media (max-width: 1440px) {
+  .cardBorder {
+    border: 75px solid;
+    -o-border-image: url(./imgs/home/border.png) 135;
+       border-image: url(./imgs/home/border.png) 135;
+  }
+}
+@media (max-width: 1200px) {
+  .cardBorder {
+    border: 40px solid;
+    -o-border-image: url(./imgs/home/border.png) 135;
+       border-image: url(./imgs/home/border.png) 135;
+  }
+}
+@media (max-width: 768px) {
+  .cardBorder {
+    border: 40px solid;
+    -o-border-image: url(./imgs/home/border.png) 135;
+       border-image: url(./imgs/home/border.png) 135;
+  }
+  .shopDecor {
+    width: 100%;
+  }
+}
+@media (max-width: 512px) {
+  section .home {
+    background: url(./imgs/home/89A1665.jpg) no-repeat center/cover;
+    min-height: 50vh;
+    letter-spacing: 0.5rem;
+  }
+  .cardBorder {
+    border: 50px solid;
+    -o-border-image: url(./imgs/home/border.png) 135;
+       border-image: url(./imgs/home/border.png) 135;
+  }
+}
+/*如果螢幕寬度為 400px 以上 且 700px 以下，就套用 css 設定*/
+.Mybutton {
+  background-color: transparent;
+  color: #fff;
+  border: 2px solid #fff;
+  padding: 0.25rem 2rem 0.25rem 2rem;
+  transition: all 0.5s;
+}
+.Mybutton:hover {
+  background: #fff;
+  color: black;
 }
 
 .rating span {

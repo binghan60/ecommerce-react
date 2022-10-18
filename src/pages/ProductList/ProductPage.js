@@ -8,6 +8,7 @@ import {
   Badge,
   Form,
   FloatingLabel,
+  Container,
 } from "react-bootstrap";
 import { Helmet } from "react-helmet-async";
 import Rating from "./components/Rating";
@@ -61,7 +62,7 @@ function ProductPage() {
         const { data } = await axios.get(
           `http://localhost:5000/api/products/slug/${slug}`
         );
-        dispatch({ type: "FETCH_SUCCESS", payload: data });//product在此設定的
+        dispatch({ type: "FETCH_SUCCESS", payload: data }); //product在此設定的
       } catch (err) {
         dispatch({ type: "FETCH_FAIL", payload: "取得商品資料失敗" });
       }
@@ -93,7 +94,8 @@ function ProductPage() {
   const submitHandler = async (e) => {
     //評論功能
     e.preventDefault();
-    if (!rating) {//不給評價跳提示
+    if (!rating) {
+      //不給評價跳提示
       toast.error("請選擇評分和留言");
     }
 
@@ -109,7 +111,7 @@ function ProductPage() {
       dispatch({ type: "CREATE_SUCCESS" });
       toast.success("評論成功");
       products.reviews.unshift(data.review); //發表時顯示在最前面 只是本頁的狀態
-      products.numReviews = data.numReviews;//data後端傳來的狀態 更新商品狀態
+      products.numReviews = data.numReviews; //data後端傳來的狀態 更新商品狀態
       products.rating = data.rating;
       setRating(0);
       setComment("");
@@ -132,148 +134,150 @@ function ProductPage() {
       ) : error ? (
         "發生錯誤"
       ) : (
-        <Row>
-          {/* 網頁標題 */}
-          <Helmet>
-            <title className="text-center">{products.name}</title>
-          </Helmet>
-          <Col sm={12} md={5} lg={5}>
-            <img
-              className="w-100 h-100"
-              src={
-                products.image && products.image.length > 20
-                  ? products.image
-                  : `/imgs/${products.image}`
-              }
-              alt={products.name}
-            />
-          </Col>
-          <Col sm={12} md={7} lg={7}>
-            <ListGroup style={{ height: "100%" }}>
-              <ListGroup.Item className="fs-5 pt-4">
-                <p>{products.name}</p>
-              </ListGroup.Item>
-              <ListGroup.Item className="fs-5 pt-3">
-                <p>評價：</p>
-                <Rating
-                  rating={products.rating}
-                  numReviews={products.numReviews}
-                ></Rating>
-              </ListGroup.Item>
-              <ListGroup.Item className="flex-grow-1">
-                <p className="fs-5 pt-2">商品描述：</p>
-                <p className="fs-6">{products.description}</p>
-              </ListGroup.Item>
-              <ListGroup.Item className="pt-3">
-                <p className="fs-5">
-                  商品狀態：
-                  {products.countInStock > 0 ? (
-                    <Badge bg="success">庫存充足</Badge>
-                  ) : (
-                    <Badge bg="danger">售完</Badge>
-                  )}
-                </p>
-              </ListGroup.Item>
-              <ListGroup.Item className="pt-3">
-                <p className="fs-5">價格：</p>
-
-                <p className="text-center fs-5">{products.price}元</p>
-              </ListGroup.Item>
-              {products.countInStock > 0 ? (
-                <ListGroup.Item>
-                  <div className="d-grid">
-                    <Button
-                      className="fs-5"
-                      onClick={addToCartHandler}
-                      variant="success"
-                    >
-                      加入購物車
-                    </Button>
-                  </div>
+        <Container className="mt-5">
+          <Row>
+            {/* 網頁標題 */}
+            <Helmet>
+              <title className="text-center">{products.name}</title>
+            </Helmet>
+            <Col sm={12} md={5} lg={5}>
+              <img
+                className="w-100 h-100"
+                src={
+                  products.image && products.image.length > 20
+                    ? products.image
+                    : `/imgs/${products.image}`
+                }
+                alt={products.name}
+              />
+            </Col>
+            <Col sm={12} md={7} lg={7}>
+              <ListGroup style={{ height: "100%" }}>
+                <ListGroup.Item className="fs-5 pt-4">
+                  <p>{products.name}</p>
                 </ListGroup.Item>
-              ) : (
-                <ListGroup.Item>
-                  <div className="d-grid">
-                    <Button variant="danger" disabled>
-                      商品補貨中
-                    </Button>
-                  </div>
+                <ListGroup.Item className="fs-5 pt-3">
+                  <p>評價：</p>
+                  <Rating
+                    rating={products.rating}
+                    numReviews={products.numReviews}
+                  ></Rating>
                 </ListGroup.Item>
-              )}
-            </ListGroup>
-          </Col>
-
-          <div className="text-center">
-            <Link to={"/productlist"}>
-              <button className="btn btn-light my-5 fs-5">回商品列表</button>
-            </Link>
-          </div>
-          <div className="">
-            <h5 ref={ratingRef}>商品討論版</h5>
-            <div className="">
-              {products.reviews.length === 0 && (
-                <p>這件商品還沒有評價唷!! 快來分享心得吧</p>
-              )}
-            </div>
-            <ListGroup>
-              {products.reviews.map((review, i) => (
-                <ListGroup.Item key={review._id}>
-                  <strong className="fs-5">{review.name}</strong>
-                  <Rating rating={review.rating} ratingTitle={" "}></Rating>
-                  <p>{review.createdAt.substring(0, 10)}</p>
-                  <p>{review.comment}</p>
+                <ListGroup.Item className="flex-grow-1">
+                  <p className="fs-5 pt-2">商品描述：</p>
+                  <p className="fs-6">{products.description}</p>
                 </ListGroup.Item>
-              ))}
-            </ListGroup>
-            <div className="my-3">
-              {userInfo ? (
-                <form onSubmit={submitHandler}>
-                  <h5>發佈留言</h5>
-                  <Form.Group className="mb-3" controlId="rating">
-                    <Form.Label>評分</Form.Label>
+                <ListGroup.Item className="pt-3">
+                  <p className="fs-5">
+                    商品狀態：
+                    {products.countInStock > 0 ? (
+                      <Badge bg="success">庫存充足</Badge>
+                    ) : (
+                      <Badge bg="danger">售完</Badge>
+                    )}
+                  </p>
+                </ListGroup.Item>
+                <ListGroup.Item className="pt-3">
+                  <p className="fs-5">價格：</p>
 
-                    <Form.Select
-                      className="mb-3"
-                      aria-label="Rating"
-                      value={rating}
-                      onChange={(e) => setRating(e.target.value)}
-                    >
-                      <option value="">---請選擇---</option>
-                      <option value="5">5星-非常好</option>
-                      <option value="4">4星-很好</option>
-                      <option value="3">3星-普通</option>
-                      <option value="2">2星-不滿意</option>
-                      <option value="1">1星-差強人意</option>
-                    </Form.Select>
-
-                    <FloatingLabel
-                      controlId="floatingTextarea"
-                      label="Comments"
-                      className="mb-3"
-                    >
-                      <Form.Control
-                        as="textarea"
-                        placeholder="Leave a comment here"
-                        style={{ height: "100px" }}
-                        value={comment}
-                        onChange={(e) => setComment(e.target.value)}
-                      ></Form.Control>
-                    </FloatingLabel>
-                    <div className="mb-3 text-center">
-                      <Button disabled={loadingCreateReview} type="submit">
-                        送出
+                  <p className="text-center fs-5">{products.price}元</p>
+                </ListGroup.Item>
+                {products.countInStock > 0 ? (
+                  <ListGroup.Item>
+                    <div className="d-grid">
+                      <Button
+                        className="fs-5"
+                        onClick={addToCartHandler}
+                        variant="success"
+                      >
+                        加入購物車
                       </Button>
                     </div>
-                  </Form.Group>
-                </form>
-              ) : (
-                <Link to={`/signin?redirect=/productlist/${products.slug}`}>
-                  請先登入會員才能分享
-                </Link>
-              )}
+                  </ListGroup.Item>
+                ) : (
+                  <ListGroup.Item>
+                    <div className="d-grid">
+                      <Button variant="danger" disabled>
+                        商品補貨中
+                      </Button>
+                    </div>
+                  </ListGroup.Item>
+                )}
+              </ListGroup>
+            </Col>
+
+            <div className="text-center">
+              <Link to={"/productlist"}>
+                <button className="btn btn-light my-5 fs-5">回商品列表</button>
+              </Link>
             </div>
-          </div>
-        </Row>
+            <div className="">
+              <h5 ref={ratingRef}>商品討論版</h5>
+              <div className="">
+                {products.reviews.length === 0 && (
+                  <p>這件商品還沒有評價唷!! 快來分享心得吧</p>
+                )}
+              </div>
+              <ListGroup>
+                {products.reviews.map((review, i) => (
+                  <ListGroup.Item key={review._id}>
+                    <strong className="fs-5">{review.name}</strong>
+                    <Rating rating={review.rating} ratingTitle={" "}></Rating>
+                    <p>{review.createdAt.substring(0, 10)}</p>
+                    <p>{review.comment}</p>
+                  </ListGroup.Item>
+                ))}
+              </ListGroup>
+              <div className="my-3">
+                {userInfo ? (
+                  <form onSubmit={submitHandler}>
+                    <h5>發佈留言</h5>
+                    <Form.Group className="mb-3" controlId="rating">
+                      <Form.Label>評分</Form.Label>
+
+                      <Form.Select
+                        className="mb-3"
+                        aria-label="Rating"
+                        value={rating}
+                        onChange={(e) => setRating(e.target.value)}
+                      >
+                        <option value="">---請選擇---</option>
+                        <option value="5">5星-非常好</option>
+                        <option value="4">4星-很好</option>
+                        <option value="3">3星-普通</option>
+                        <option value="2">2星-不滿意</option>
+                        <option value="1">1星-差強人意</option>
+                      </Form.Select>
+
+                      <FloatingLabel
+                        controlId="floatingTextarea"
+                        label="Comments"
+                        className="mb-3"
+                      >
+                        <Form.Control
+                          as="textarea"
+                          placeholder="Leave a comment here"
+                          style={{ height: "100px" }}
+                          value={comment}
+                          onChange={(e) => setComment(e.target.value)}
+                        ></Form.Control>
+                      </FloatingLabel>
+                      <div className="mb-3 text-center">
+                        <Button disabled={loadingCreateReview} type="submit">
+                          送出
+                        </Button>
+                      </div>
+                    </Form.Group>
+                  </form>
+                ) : (
+                  <Link to={`/signin?redirect=/productlist/${products.slug}`}>
+                    請先登入會員才能分享
+                  </Link>
+                )}
+              </div>
+            </div>
+          </Row>
+        </Container>
       )}
     </>
   );

@@ -3,7 +3,7 @@ import { Store } from "../../Store";
 import { Helmet } from "react-helmet-async";
 import axios from "axios";
 import LoadingBox from "../../components/LoadingBox";
-import { Card, Col, Row } from "react-bootstrap";
+import { Card, Col, Container, Row } from "react-bootstrap";
 import Chart from "react-google-charts";
 
 const reducer = (state, action) => {
@@ -50,7 +50,7 @@ function Dashboard() {
       ) : error ? (
         error
       ) : (
-        <>
+        <Container className="mt-5">
           <h3 className="my-3">歡迎{userInfo.name}主管</h3>
           <div className="dashboard">
             <Helmet>
@@ -132,7 +132,7 @@ function Dashboard() {
               )}
             </div>
           </div>
-        </>
+        </Container>
       )}
     </>
   );
