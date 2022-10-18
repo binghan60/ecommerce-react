@@ -12,69 +12,69 @@ function Home() {
   const cardRef4 = useRef(null);
   const cardRef5 = useRef(null);
   const cardRef6 = useRef(null);
-  useEffect(() => {
-    gsap.from(cardRef1.current, {
-      delay: 0,
-      opacity: 0,
-      y: -150,
-      duration: 1.5,
-      scrollTrigger: {
-        trigger: cardRef1.current,
-        toggleActions: "restart reverse restart none",
-      },
-    });
-    gsap.from(cardRef2.current, {
-      delay: 0.25,
-      rotation: -180,
-      opacity: 0,
-      y: -150,
-      duration: 1.5,
-      scrollTrigger: {
-        trigger: cardRef1.current,
-        toggleActions: "restart reverse restart none",
-      },
-    });
-    gsap.from(cardRef3.current, {
-      delay: 0.5,
-      opacity: 0,
-      y: -150,
-      duration: 1.5,
-      scrollTrigger: {
-        trigger: cardRef1.current,
-        toggleActions: "restart reverse restart none",
-      },
-    });
-    gsap.from(cardRef4.current, {
-      delay: 0.75,
-      opacity: 0,
-      y: -150,
-      duration: 1.5,
-      scrollTrigger: {
-        trigger: cardRef1.current,
-        toggleActions: "restart reverse restart none",
-      },
-    });
-    gsap.from(cardRef5.current, {
-      delay: 1,
-      opacity: 0,
-      y: -150,
-      duration: 1.5,
-      scrollTrigger: {
-        trigger: cardRef1.current,
-        toggleActions: "restart reverse restart none",
-      },
-    });
-    gsap.from(cardRef6.current, {
-      delay: 1.25,
-      opacity: 0,
-      y: -150,
-      duration: 1.5,
-      scrollTrigger: {
-        trigger: cardRef1.current,
-        toggleActions: "restart reverse restart none",
-      },
-    });
-  }, []);
+  // useEffect(() => {
+  //   gsap.from(cardRef1.current, {
+  //     delay: 0,
+  //     opacity: 0,
+  //     y: -150,
+  //     duration: 1.5,
+  //     scrollTrigger: {
+  //       trigger: cardRef1.current,
+  //       toggleActions: "restart reverse restart none",
+  //     },
+  //   });
+  //   gsap.from(cardRef2.current, {
+  //     delay: 0.25,
+  //     rotation: -180,
+  //     opacity: 0,
+  //     y: -150,
+  //     duration: 1.5,
+  //     scrollTrigger: {
+  //       trigger: cardRef1.current,
+  //       toggleActions: "restart reverse restart none",
+  //     },
+  //   });
+  //   gsap.from(cardRef3.current, {
+  //     delay: 0.5,
+  //     opacity: 0,
+  //     y: -150,
+  //     duration: 1.5,
+  //     scrollTrigger: {
+  //       trigger: cardRef1.current,
+  //       toggleActions: "restart reverse restart none",
+  //     },
+  //   });
+  //   gsap.from(cardRef4.current, {
+  //     delay: 0.75,
+  //     opacity: 0,
+  //     y: -150,
+  //     duration: 1.5,
+  //     scrollTrigger: {
+  //       trigger: cardRef1.current,
+  //       toggleActions: "restart reverse restart none",
+  //     },
+  //   });
+  //   gsap.from(cardRef5.current, {
+  //     delay: 1,
+  //     opacity: 0,
+  //     y: -150,
+  //     duration: 1.5,
+  //     scrollTrigger: {
+  //       trigger: cardRef1.current,
+  //       toggleActions: "restart reverse restart none",
+  //     },
+  //   });
+  //   gsap.from(cardRef6.current, {
+  //     delay: 1.25,
+  //     opacity: 0,
+  //     y: -150,
+  //     duration: 1.5,
+  //     scrollTrigger: {
+  //       trigger: cardRef1.current,
+  //       toggleActions: "restart reverse restart none",
+  //     },
+  //   });
+  // }, []);
   return (
     <>
       <section>
